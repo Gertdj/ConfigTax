@@ -32,17 +32,13 @@ namespace ConfigTaxWin
             ti.NormalEarnings.SetTravelAllowancePTD(1000);
 
 
-
             TotalNormalPTD = ti.NormalEarnings.GetTotalNormalEarningsPTD();
             TotalNormalTaxablePTD = ti.NormalEarnings.GetTotalTaxableNormalEarningsPTD();
-
-
-
 
             MessageBox.Show(TotalNormalPTD.ToString());
             MessageBox.Show(TotalNormalTaxablePTD.ToString());   
             
-            
+           
 
         }
 

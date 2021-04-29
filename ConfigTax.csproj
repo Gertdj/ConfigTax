@@ -67,22 +67,22 @@
   <ItemGroup>
     <Compile Include="Annualisation\IAnnualisationMethod.cs" />
     <Compile Include="Annualisation\NonCumulative.cs" />
-    <Compile Include="Input\AnnualEarnings.cs" />
-    <Compile Include="Input\Annuity.cs" />
-    <Compile Include="Input\Bonus.cs" />
-    <Compile Include="Input\Earnings.cs" />
-    <Compile Include="Input\FringeBenefits.cs" />
-    <Compile Include="Input\LeaveCommutation.cs" />
-    <Compile Include="Input\NormalEarnings.cs" />
-    <Compile Include="Input\Pension.cs" />
-    <Compile Include="Input\PreTaxDeductions.cs" />
-    <Compile Include="Input\Relief.cs" />
-    <Compile Include="Input\Reliefs.cs" />
+    <Compile Include="AnnualEarnings\AnnualEarnings.cs" />
+    <Compile Include="PreTaxDeductions\Annuity.cs" />
+    <Compile Include="AnnualEarnings\Bonus.cs" />
+    <Compile Include="NormalEarnings\Earnings.cs" />
+    <Compile Include="NormalEarnings\FringeBenefits.cs" />
+    <Compile Include="AnnualEarnings\LeaveCommutation.cs" />
+    <Compile Include="NormalEarnings\NormalEarnings.cs" />
+    <Compile Include="PreTaxDeductions\Pension.cs" />
+    <Compile Include="PreTaxDeductions\PreTaxDeductions.cs" />
+    <Compile Include="Reliefs\Relief.cs" />
+    <Compile Include="Reliefs\Reliefs.cs" />
     <Compile Include="Input\RunDetail.cs" />
-    <Compile Include="Input\Shares.cs" />
+    <Compile Include="AnnualEarnings\Shares.cs" />
     <Compile Include="Input\TaxElement.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Input\TravelAllowance.cs" />
+    <Compile Include="NormalEarnings\TravelAllowance.cs" />
     <Compile Include="TaxInformation.cs" />
   </ItemGroup>
   <ItemGroup />

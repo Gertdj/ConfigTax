@@ -4,8 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Runtime.InteropServices;
+using ConfigTax.Input;
 
-namespace ConfigTax.Input
+namespace ConfigTax
 {
     [ComVisible(true)]
     [ClassInterface(ClassInterfaceType.AutoDual)]
