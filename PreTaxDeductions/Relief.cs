@@ -11,7 +11,5 @@ namespace ConfigTax.Input
     [ClassInterface(ClassInterfaceType.AutoDual)]
     public class Relief:TaxElement
     {
-
-
     }
 }

@@ -17,7 +17,7 @@ namespace ConfigTax
         public Bonus Bonus { get; set; }
         public Shares Shares { get; set; }
         public LeaveCommutation LeaveCommutation { get; set; }
-        public double TotalAnnualEarningsPTD { get; set; }
+        public double TotalAnnualEarningsYTD { get; set; }
 
         //Constructor
         public AnnualEarnings()
@@ -81,11 +81,11 @@ namespace ConfigTax
         }
 
 
-        public double GetTotalAnnualEarningsPTD()
+        public double GetTotalAnnualEarningsYTD()
         {
             double TotalAnnualEarnings;
-            TotalAnnualEarnings = Bonus.AmountPTD + Shares.AmountPTD + LeaveCommutation.AmountPTD ;
-            TotalAnnualEarningsPTD = TotalAnnualEarnings;
+            TotalAnnualEarnings = Bonus.AmountYTD + Shares.AmountYTD + LeaveCommutation.AmountYTD ;
+            TotalAnnualEarningsYTD = TotalAnnualEarnings;
             return TotalAnnualEarnings;
         }
     }

@@ -23,10 +23,15 @@ namespace ConfigTaxWin
             double TotalNormalPTD;
             double TotalNormalTaxablePTD;
 
+            double TotalAnnualYTD;
+
             TaxInformation ti = new TaxInformation();
 
             ti.NormalEarnings.SetEarningsPTD(10000);
             ti.NormalEarnings.SetTravelAllowancePTD(1000);
+
+            ti.AnnualEarnings.SetBonusYTD(20000);
+            ti.AnnualEarnings.SetSharesYTD(50000);
 
 
             TotalNormalPTD = ti.NormalEarnings.GetTotalNormalEarningsPTD();
@@ -35,11 +40,9 @@ namespace ConfigTaxWin
             MessageBox.Show(TotalNormalPTD.ToString());
             MessageBox.Show(TotalNormalTaxablePTD.ToString());
 
+            TotalAnnualYTD = ti.AnnualEarnings.GetTotalAnnualEarningsYTD();
 
-            
-
-
-
+            MessageBox.Show("TotalAnnualEarnings_YTD: " + TotalAnnualYTD.ToString());
         }
     }
 }
