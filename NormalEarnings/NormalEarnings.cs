@@ -17,8 +17,8 @@ namespace ConfigTax
         public Earnings Earnings { get; set; }
         public FringeBenefits FringeBenefits  { get; set; }
         public TravelAllowance TravelAllowance { get; set; }
-        public double TotalNormalEarningsPTD { get; set; }
-        public double TotalTaxableNormalEarningsPTD { get; set; }
+        public double TotalNormalEarningsYTD { get; set; }
+        public double TotalTaxableNormalEarningsYTD { get; set; }
 
         //Constructor
         public NormalEarnings()
@@ -79,24 +79,24 @@ namespace ConfigTax
 
         public void SetTravelAllowanceYTD(double Amount)
         {
-            TravelAllowance.AmountYTD = Amount;
+            TravelAllowance.SetAmountYTD(Amount);
         }
 
 
-        public double GetTotalNormalEarningsPTD()
+        public double GetTotalNormalEarningsYTD()
         {
             double TotalNormalEarnings;
-            TotalNormalEarnings = Earnings.AmountPTD + FringeBenefits.AmountPTD + TravelAllowance.AmountPTD;
-            TotalNormalEarningsPTD = TotalNormalEarnings;
-            return TotalNormalEarningsPTD;
+            TotalNormalEarnings = Earnings.AmountYTD + FringeBenefits.AmountYTD + TravelAllowance.AmountYTD;
+            TotalNormalEarningsYTD = TotalNormalEarnings;
+            return TotalNormalEarningsYTD;
         }
 
         public double GetTotalTaxableNormalEarningsPTD()
         {
             double TotalNormalTaxableEarnings;
-            TotalNormalTaxableEarnings = Earnings.AmountPTD + FringeBenefits.AmountPTD + TravelAllowance.AmountPTD_Taxable;
-            TotalTaxableNormalEarningsPTD = TotalNormalTaxableEarnings;
-            return TotalTaxableNormalEarningsPTD;
+            TotalNormalTaxableEarnings = Earnings.AmountYTD + FringeBenefits.AmountYTD + TravelAllowance.AmountYTD_Taxable;
+            TotalTaxableNormalEarningsYTD = TotalNormalTaxableEarnings;
+            return TotalTaxableNormalEarningsYTD;
         }
 
     }

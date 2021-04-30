@@ -19,7 +19,6 @@ namespace ConfigTax
         public NormalEarnings NormalEarnings  { get; set; }
         public AnnualEarnings AnnualEarnings { get; set; }
         public PreTaxDeductions PreTaxDeductions { get; set; }
-        public Reliefs Reliefs { get; set; }
 
         //Constructor
         public TaxInformation()
@@ -29,7 +28,6 @@ namespace ConfigTax
             CreateNormalEarnings();
             CreateAnnualEarnings();
             CreatePreTaxDeductions();
-            CreateReliefs();
         }
 
         //Overloaded Construcor
@@ -69,10 +67,9 @@ namespace ConfigTax
             PreTaxDeductions = preTaxDeductions;
         }
 
-        private void CreateReliefs()
+        public void GetTaxableEarningsYTD()
         {
-            Reliefs reliefs = new Reliefs();
-            Reliefs = reliefs;
+
         }
     }
 }

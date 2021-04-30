@@ -76,8 +76,7 @@
     <Compile Include="NormalEarnings\NormalEarnings.cs" />
     <Compile Include="PreTaxDeductions\Pension.cs" />
     <Compile Include="PreTaxDeductions\PreTaxDeductions.cs" />
-    <Compile Include="Reliefs\Relief.cs" />
-    <Compile Include="Reliefs\Reliefs.cs" />
+    <Compile Include="PreTaxDeductions\Relief.cs" />
     <Compile Include="Input\RunDetail.cs" />
     <Compile Include="AnnualEarnings\Shares.cs" />
     <Compile Include="Input\TaxElement.cs" />

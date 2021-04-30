@@ -49,7 +49,7 @@ namespace ConfigTaxTest
             double amt;
             TaxInformation ti = new TaxInformation();
             ti.NormalEarnings.TravelAllowance.SetAmountPTD(1000);
-            amt = ti.NormalEarnings.TravelAllowance.AmountPTD_Taxable;
+            amt = ti.NormalEarnings.TravelAllowance.AmountYTD_Taxable;
             Assert.AreEqual(amt, 800);
         }
     }
