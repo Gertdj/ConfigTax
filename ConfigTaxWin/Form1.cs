@@ -8,8 +8,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using ConfigTax;
-using ConfigTax.Input;
-using ConfigTax.Annualisation;
 
 namespace ConfigTaxWin
 {
@@ -18,24 +16,16 @@ namespace ConfigTaxWin
         public Form1()
         {
             InitializeComponent();
-        
-
-
-
-
-
-
-
+        }
 
         private void button1_Click(object sender, EventArgs e)
         {
-
             double TotalNormalPTD;
             double TotalNormalTaxablePTD;
-            
+
             TaxInformation ti = new TaxInformation();
 
-            ti.NormalEarnings.SetEarningsPTD (10000);
+            ti.NormalEarnings.SetEarningsPTD(10000);
             ti.NormalEarnings.SetTravelAllowancePTD(1000);
 
 
@@ -43,18 +33,13 @@ namespace ConfigTaxWin
             TotalNormalTaxablePTD = ti.NormalEarnings.GetTotalTaxableNormalEarningsPTD();
 
             MessageBox.Show(TotalNormalPTD.ToString());
-            MessageBox.Show(TotalNormalTaxablePTD.ToString());   
+            MessageBox.Show(TotalNormalTaxablePTD.ToString());
+
+
             
-           
+
+
 
         }
-
-       
-
-
-
-
-
-
     }
 }

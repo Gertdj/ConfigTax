@@ -88,15 +88,15 @@ namespace ConfigTax
             double TotalNormalEarnings;
             TotalNormalEarnings = Earnings.AmountPTD + FringeBenefits.AmountPTD + TravelAllowance.AmountPTD;
             TotalNormalEarningsPTD = TotalNormalEarnings;
-            return TotalNormalEarnings;
+            return TotalNormalEarningsPTD;
         }
 
         public double GetTotalTaxableNormalEarningsPTD()
         {
-            double TotalNormalEarnings;
-            TotalNormalEarnings = Earnings.AmountPTD + FringeBenefits.AmountPTD + TravelAllowance.AmountPTD_Taxable;
-            TotalTaxableNormalEarningsPTD = TotalNormalEarnings;
-            return TotalNormalEarnings;
+            double TotalNormalTaxableEarnings;
+            TotalNormalTaxableEarnings = Earnings.AmountPTD + FringeBenefits.AmountPTD + TravelAllowance.AmountPTD_Taxable;
+            TotalTaxableNormalEarningsPTD = TotalNormalTaxableEarnings;
+            return TotalTaxableNormalEarningsPTD;
         }
 
     }
