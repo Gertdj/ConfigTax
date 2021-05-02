@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Runtime.InteropServices;
 
-namespace ConfigTax.Input
+namespace ConfigTax
 {
     [ComVisible(true)]
     [ClassInterface(ClassInterfaceType.AutoDual)]

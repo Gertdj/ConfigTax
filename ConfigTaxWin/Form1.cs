@@ -20,8 +20,7 @@ namespace ConfigTaxWin
 
         private void button1_Click(object sender, EventArgs e)
         {
-            double TotalNormalYTD;
-            double TotalNormalTaxableYTD;
+            double TotalTaxableNormalEarnings;
 
             double TotalAnnualYTD;
 
@@ -34,17 +33,13 @@ namespace ConfigTaxWin
             ti.AnnualEarnings.SetSharesYTD(50000);
 
 
-            TotalNormalYTD = ti.NormalEarnings.GetTotalNormalEarningsYTD();
-            TotalNormalTaxableYTD = ti.NormalEarnings.GetTotalTaxableNormalEarningsPTD();
-
-            MessageBox.Show(TotalNormalYTD.ToString());
-            MessageBox.Show(TotalNormalTaxableYTD.ToString());
-
             TotalAnnualYTD = ti.AnnualEarnings.GetTotalAnnualEarningsYTD();
 
-            MessageBox.Show("TotalAnnualEarnings_YTD: " + TotalAnnualYTD.ToString());
+            MessageBox.Show("TotalAnnEarnYTD: " + TotalAnnualYTD.ToString());
 
-            
+            TotalTaxableNormalEarnings = ti.GetTotalTaxableNormalEarningsYTD();
+
+            MessageBox.Show("TotalTaxNormEarnYTD | " + TotalTaxableNormalEarnings.ToString());
 
         }
     }

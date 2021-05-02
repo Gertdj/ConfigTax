@@ -8,6 +8,6 @@ namespace ConfigTax.Annualisation
 {
     interface IAnnualisationMethod
     {
-        double TaxableEarnings { get; set; }
+        double AnnualTaxableNormalEarnings { get; set; }
     }
 }

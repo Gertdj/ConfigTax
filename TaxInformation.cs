@@ -4,8 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Runtime.InteropServices;
-using ConfigTax;
-using ConfigTax.Input;
+//using ConfigTax;
+//using ConfigTax.Input;
 
 namespace ConfigTax
 {
@@ -15,10 +15,12 @@ namespace ConfigTax
     {
         [ComVisible(true)]
         //Propereties
-        public RunDetail RunDetail { get; set; }
+        public ConfigTax.RunDetail RunDetail { get; set; }
         public NormalEarnings NormalEarnings  { get; set; }
         public AnnualEarnings AnnualEarnings { get; set; }
         public PreTaxDeductions PreTaxDeductions { get; set; }
+        public double TotalTaxableNormalEarnings { get; private set; }
+
 
         //Constructor
         public TaxInformation()
@@ -67,9 +69,10 @@ namespace ConfigTax
             PreTaxDeductions = preTaxDeductions;
         }
 
-        public void GetTaxableEarningsYTD()
+        public double GetTotalTaxableNormalEarningsYTD()
         {
-
+            TotalTaxableNormalEarnings = NormalEarnings.GetTotalTaxableNormalEarningsYTD();
+            return TotalTaxableNormalEarnings;
         }
     }
 }
