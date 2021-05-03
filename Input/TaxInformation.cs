@@ -4,8 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Runtime.InteropServices;
-//using ConfigTax;
-//using ConfigTax.Input;
 
 namespace ConfigTax
 {
@@ -19,7 +17,7 @@ namespace ConfigTax
         public NormalEarnings NormalEarnings  { get; set; }
         public AnnualEarnings AnnualEarnings { get; set; }
         public PreTaxDeductions PreTaxDeductions { get; set; }
-        public double TotalTaxableNormalEarnings { get; private set; }
+ 
 
 
         //Constructor
@@ -69,10 +67,12 @@ namespace ConfigTax
             PreTaxDeductions = preTaxDeductions;
         }
 
-        public double GetTotalTaxableNormalEarningsYTD()
+        public double GetNormalEarningsAnnualised(double TaxableNormalEarningsYTD)
         {
-            TotalTaxableNormalEarnings = NormalEarnings.GetTotalTaxableNormalEarningsYTD();
-            return TotalTaxableNormalEarnings;
+            var EarnAnn = Annualise.Calc(1, TaxableNormalEarningsYTD, 30.416666666667, 365);
+
+            return EarnAnn;
+
         }
     }
 }

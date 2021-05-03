@@ -83,7 +83,7 @@ namespace ConfigTax
         }
 
 
-        public double GetTotalTaxableNormalEarningsYTD()
+        public double GetTaxableNormalEarningsYTD()
         {
             double TotalNormalEarnings;
             TotalNormalEarnings = Earnings.AmountYTD + FringeBenefits.AmountYTD + TravelAllowance.AmountYTD_Taxable;

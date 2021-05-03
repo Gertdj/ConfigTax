@@ -65,25 +65,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Annualisation\Average.cs" />
-    <Compile Include="Types\IAnnualisationMethod.cs" />
-    <Compile Include="Annualisation\NonCumulative.cs" />
-    <Compile Include="AnnualEarnings\AnnualEarnings.cs" />
-    <Compile Include="PreTaxDeductions\Annuity.cs" />
-    <Compile Include="AnnualEarnings\Bonus.cs" />
-    <Compile Include="NormalEarnings\Earnings.cs" />
-    <Compile Include="NormalEarnings\FringeBenefits.cs" />
-    <Compile Include="AnnualEarnings\LeaveCommutation.cs" />
-    <Compile Include="NormalEarnings\NormalEarnings.cs" />
-    <Compile Include="PreTaxDeductions\Pension.cs" />
-    <Compile Include="PreTaxDeductions\PreTaxDeductions.cs" />
-    <Compile Include="PreTaxDeductions\Relief.cs" />
-    <Compile Include="RunDetail.cs" />
-    <Compile Include="AnnualEarnings\Shares.cs" />
-    <Compile Include="Types\TaxElement.cs" />
+    <Compile Include="Input\Annualisation\Annualise.cs" />
+    <Compile Include="Input\AnnualEarnings\AnnualEarnings.cs" />
+    <Compile Include="Input\PreTaxDeductions\Annuity.cs" />
+    <Compile Include="Input\AnnualEarnings\Bonus.cs" />
+    <Compile Include="Input\NormalEarnings\Earnings.cs" />
+    <Compile Include="Input\NormalEarnings\FringeBenefits.cs" />
+    <Compile Include="Input\AnnualEarnings\LeaveCommutation.cs" />
+    <Compile Include="Input\NormalEarnings\NormalEarnings.cs" />
+    <Compile Include="Input\PreTaxDeductions\Pension.cs" />
+    <Compile Include="Input\PreTaxDeductions\PreTaxDeductions.cs" />
+    <Compile Include="Input\PreTaxDeductions\Relief.cs" />
+    <Compile Include="Input\RunDetail.cs" />
+    <Compile Include="Input\AnnualEarnings\Shares.cs" />
+    <Compile Include="Input\Types\TaxElement.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="NormalEarnings\TravelAllowance.cs" />
-    <Compile Include="TaxInformation.cs" />
+    <Compile Include="Input\NormalEarnings\TravelAllowance.cs" />
+    <Compile Include="Input\TaxInformation.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

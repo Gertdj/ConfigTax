@@ -20,26 +20,26 @@ namespace ConfigTaxWin
 
         private void button1_Click(object sender, EventArgs e)
         {
-            double TotalTaxableNormalEarnings;
-
-            double TotalAnnualYTD;
-
-            TaxInformation ti = new TaxInformation();
+            var ti = new TaxInformation();
 
             ti.NormalEarnings.SetEarningsYTD(10000);
             ti.NormalEarnings.SetTravelAllowanceYTD(1000);
 
-            ti.AnnualEarnings.SetBonusYTD(20000);
-            ti.AnnualEarnings.SetSharesYTD(50000);
+            // ti.AnnualEarnings.SetBonusYTD(20000);
+            // ti.AnnualEarnings.SetSharesYTD(50000);
 
 
-            TotalAnnualYTD = ti.AnnualEarnings.GetTotalAnnualEarningsYTD();
+            // var TotalAnnualYTD = ti.AnnualEarnings.GetTotalAnnualEarningsYTD();
+            // MessageBox.Show("TotalAnnEarnYTD: " + TotalAnnualYTD.ToString());
 
-            MessageBox.Show("TotalAnnEarnYTD: " + TotalAnnualYTD.ToString());
+            var TaxNormEarn =  ti.NormalEarnings.GetTaxableNormalEarningsYTD();
+            MessageBox.Show(TaxNormEarn.ToString());
 
-            TotalTaxableNormalEarnings = ti.GetTotalTaxableNormalEarningsYTD();
+            var AnnNormEarn = Annualise.Calc(1, TaxNormEarn,30.416666666667,365);
+            MessageBox.Show(AnnNormEarn.ToString());
 
-            MessageBox.Show("TotalTaxNormEarnYTD | " + TotalTaxableNormalEarnings.ToString());
+            AnnNormEarn = Math.Round(ti.GetNormalEarningsAnnualised(TaxNormEarn));
+            MessageBox.Show(AnnNormEarn.ToString());
 
         }
     }

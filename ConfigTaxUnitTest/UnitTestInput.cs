@@ -48,9 +48,16 @@ namespace ConfigTaxTest
         {
             double amt;
             TaxInformation ti = new TaxInformation();
-            ti.NormalEarnings.TravelAllowance.SetAmountPTD(1000);
+            ti.NormalEarnings.TravelAllowance.SetAmountYTD(1000);
             amt = ti.NormalEarnings.TravelAllowance.AmountYTD_Taxable;
             Assert.AreEqual(amt, 800);
+        }
+
+        [TestMethod]
+        public void Test_Annualise_Average()
+        {
+            var AnnualTaxable = Annualise.Calc  (1, 10000, 30.4166666666667, 365);
+            Assert.AreEqual(Math.Round(AnnualTaxable), 120000);
         }
     }
 }
