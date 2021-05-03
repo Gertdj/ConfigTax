@@ -67,11 +67,12 @@ namespace ConfigTax
             PreTaxDeductions = preTaxDeductions;
         }
 
-        public double GetNormalEarningsAnnualised(double TaxableNormalEarningsYTD)
+        public double GetNormalEarningsAnnualised()
         {
-            var EarnAnn = Annualise.Calc(1, TaxableNormalEarningsYTD, 30.416666666667, 365);
-
-            return EarnAnn;
+            var NormalEarn = NormalEarnings.GetTaxableNormalEarningsYTD();
+            
+            var NormEarnAnn = Annualise.Calc(1, NormalEarn, 30.416666666667, 365);
+            return NormEarnAnn;
 
         }
     }

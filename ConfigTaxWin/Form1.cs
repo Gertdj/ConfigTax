@@ -35,11 +35,19 @@ namespace ConfigTaxWin
             var TaxNormEarn =  ti.NormalEarnings.GetTaxableNormalEarningsYTD();
             MessageBox.Show(TaxNormEarn.ToString());
 
-            var AnnNormEarn = Annualise.Calc(1, TaxNormEarn,30.416666666667,365);
+            var AnnNormEarn = Math.Round(ti.GetNormalEarningsAnnualised());
             MessageBox.Show(AnnNormEarn.ToString());
 
-            AnnNormEarn = Math.Round(ti.GetNormalEarningsAnnualised(TaxNormEarn));
-            MessageBox.Show(AnnNormEarn.ToString());
+            var taxStartDate = ti.RunDetail.TaxStartDate;
+            taxStartDate = "01-Mar-21";
+
+            DateTime dt = DateTime.Parse (taxStartDate);
+
+
+            
+
+
+
 
         }
     }

@@ -14,10 +14,12 @@ namespace ConfigTax
     {
         [ComVisible(true)]
 
+        public const double AveWorkingDays = 30.416666666667;
+        
         //Properties
-        public DateTime HireDate { get; set; }
-        public DateTime TaxStartDate { get; set; }
-        public DateTime PayrollDate { get; set; }
+        public string HireDate { get; set; }
+        public string TaxStartDate { get; set; }
+        public string PayrollDate { get; set; }
         public int DaysWorked { get; set; }
         public int TaxPeriod { get; set; }
         public int TaxPeriodsRemaining { get; set; }
