@@ -21,7 +21,7 @@ namespace ConfigTax
         public string TaxStartDate { get; set; }
         public string PayrollDate { get; set; }
         public int DaysWorked { get; set; }
-        public int TaxPeriod { get; set; }
+        public DateTime TaxPeriod { get; set; }
         public int TaxPeriodsRemaining { get; set; }
 
         //Constructor

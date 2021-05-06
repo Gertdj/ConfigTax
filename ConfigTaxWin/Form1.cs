@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,6 +21,13 @@ namespace ConfigTaxWin
 
         private void button1_Click(object sender, EventArgs e)
         {
+            //dtTaxStartDate. = 01/03/21; 
+
+            DateTime dtTaxStart = new DateTime();
+            dtTaxStart = DateTime.Parse("01-Mar-21");
+
+            //dtTaxStartDate.Value = DateTime.ParseExact("25/03/2017", "dd/MM/yyyy", CultureInfo.InvariantCulture);
+
             var ti = new TaxInformation();
 
             ti.NormalEarnings.SetEarningsYTD(10000);
@@ -38,17 +46,23 @@ namespace ConfigTaxWin
             var AnnNormEarn = Math.Round(ti.GetNormalEarningsAnnualised());
             MessageBox.Show(AnnNormEarn.ToString());
 
-            var taxStartDate = ti.RunDetail.TaxStartDate;
-            taxStartDate = "01-Mar-21";
+            ti.RunDetail.HireDate = dtHireDate.Text;
 
-            DateTime dt = DateTime.Parse (taxStartDate);
+            //var taxStartDate = ti.RunDetail.TaxStartDate;
+            //taxStartDate = "01-Mar-21";
 
+            //DateTime dt = DateTime.Parse (taxStartDate);
+
+            var tsStr = dtHireDate.Text;
 
             
 
 
+        }
 
-
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            dtTaxStartDate.Value = DateTime.ParseExact("01-Mar-21", "dd-MMM-yy", CultureInfo.InvariantCulture);
         }
     }
 }
