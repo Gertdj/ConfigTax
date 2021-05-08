@@ -28,7 +28,7 @@ namespace ConfigTaxWin
 
             //dtTaxStartDate.Value = DateTime.ParseExact("25/03/2017", "dd/MM/yyyy", CultureInfo.InvariantCulture);
 
-            var ti = new TaxInformation();
+            var ti = new ConfigTax.TaxInformation();
 
             ti.NormalEarnings.SetEarningsYTD(10000);
             ti.NormalEarnings.SetTravelAllowanceYTD(1000);
