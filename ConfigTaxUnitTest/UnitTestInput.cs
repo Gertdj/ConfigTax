@@ -14,49 +14,39 @@ namespace ConfigTaxTest
         }
 
         [TestMethod]
-        public void Test_SetEarningsPTD()
+        public void Test_SetEarnings()
         {
-            double amt;
+            decimal amt;
             TaxInformation ti = new TaxInformation();
-            ti.NormalEarnings.Earnings.SetAmountPTD(1000);
-            amt = ti.NormalEarnings.Earnings.AmountPTD;
-            Assert.AreEqual(amt, 1000);
-        }
-
-        [TestMethod]
-        public void Test_SetEarningsYTD()
-        {
-            double amt;
-            TaxInformation ti = new TaxInformation();
-            ti.NormalEarnings.Earnings.SetAmountYTD(1000);
-            amt = ti.NormalEarnings.Earnings.AmountYTD;
+            ti.NormalEarnings.Earnings.SetAmount(1000);
+            amt = ti.NormalEarnings.Earnings.Amount;
             Assert.AreEqual(amt, 1000);
         }
 
         [TestMethod]
         public void Test_SetTravelAllowancePTD()
         {
-            double amt;
+            decimal amt;
             TaxInformation ti = new TaxInformation();
-            ti.NormalEarnings.TravelAllowance.SetAmountPTD(1000);
-            amt = ti.NormalEarnings.TravelAllowance.AmountPTD;
+            ti.NormalEarnings.TravelAllowance.SetAmount(1000);
+            amt = ti.NormalEarnings.TravelAllowance.Amount;
             Assert.AreEqual(amt, 1000);
         }
 
         [TestMethod]
         public void Test_CalcTravelAllowanceTaxable()
         {
-            double amt;
+            decimal amt;
             TaxInformation ti = new TaxInformation();
-            ti.NormalEarnings.TravelAllowance.SetAmountYTD(1000);
-            amt = ti.NormalEarnings.TravelAllowance.AmountYTD_Taxable;
+            ti.NormalEarnings.TravelAllowance.SetAmount(1000);
+            amt = ti.NormalEarnings.TravelAllowance.Amount_Taxable;
             Assert.AreEqual(amt, 800);
         }
 
         [TestMethod]
         public void Test_Annualise_Average()
         {
-            var AnnualTaxable = Annualise.Calc  (1, 10000, 30.4166666666667, 365);
+            var AnnualTaxable = Annualise.Calc  (1, 10000, 30.4166666666667M, 365);
             Assert.AreEqual(Math.Round(AnnualTaxable), 120000);
         }
     }

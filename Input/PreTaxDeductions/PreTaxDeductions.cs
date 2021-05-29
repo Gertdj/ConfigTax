@@ -17,7 +17,7 @@ namespace ConfigTax
         public Pension  Pension { get; set; }
         public Annuity Annuity { get; set; }
         public Relief Relief { get; set; }
-        public double TotalPreTaxDeductions { get; set; }
+        public decimal TotalPreTaxDeductions { get; set; }
 
 
         //Constructor
@@ -50,40 +50,25 @@ namespace ConfigTax
         //Set Sub-Element values
         //Earnings
 
-        public void SetPensionPTD(double Amount)
+        public void SetPension(decimal amount)
         {
-            Pension.AmountPTD = Amount;
+            Pension.Amount = amount;
         }
 
-        public void SetPensionYTD(double Amount)
+        public void SetAnnuity(decimal amount)
         {
-            Pension.AmountYTD = Amount;
+            Annuity.Amount = amount;
         }
 
-        public void SetAnnuityPTD(double Amount)
+        public void SetRelief(decimal amount)
         {
-            Annuity.AmountPTD = Amount;
+            Relief.Amount = amount;
         }
 
-        public void SetAnnuityYTD(double Amount)
+        public decimal GetTotalPreTaxDeductions()
         {
-            Annuity.AmountYTD = Amount;
-        }
-
-        public void SetReliefPTD(double Amount)
-        {
-            Relief.AmountPTD = Amount;
-        }
-
-        public void SetReliefYTD(double Amount)
-        {
-            Relief.AmountYTD = Amount;
-        }
-
-        public double GetTotalPreTaxDeductionsYTD()
-        {
-            double PreTaxDeductions;
-            PreTaxDeductions = Relief.AmountYTD + Annuity.AmountPTD + Relief.AmountYTD;
+            decimal PreTaxDeductions;
+            PreTaxDeductions = Relief.Amount + Annuity.Amount + Relief.Amount;
             TotalPreTaxDeductions = PreTaxDeductions;
             return TotalPreTaxDeductions;
         }

@@ -17,8 +17,8 @@ namespace ConfigTax
         public Earnings Earnings { get; set; }
         public FringeBenefits FringeBenefits  { get; set; }
         public TravelAllowance TravelAllowance { get; set; }
-        public double TotalNormalEarningsYTD { get; set; }
-        public double TotalTaxableNormalEarningsYTD { get; set; }
+        public decimal TotalNormalEarnings { get; set; }
+        public decimal TotalTaxableNormalEarnings { get; set; }
 
         //Constructor
         public NormalEarnings()
@@ -50,45 +50,33 @@ namespace ConfigTax
 
         //Set Sub-Element values
         //Earnings
-        public void SetEarningsPTD(double Amount)
+        public void SetEarnings(decimal amount)
         {
-            Earnings.AmountPTD = Amount;
-        }
-
-        public void SetEarningsYTD(double Amount)
-        {
-            Earnings.AmountYTD = Amount;
+            Earnings.Amount = amount;
         }
 
         //Shares
-        public void SetSharesPTD(double Amount)
+        public void SetShares(decimal amount)
         {
-            FringeBenefits.SetAmountPTD(Amount);
-        }
-
-        public void SetFringeBenefitsYTD(double Amount)
-        {
-            FringeBenefits.SetAmountYTD(Amount);
+            FringeBenefits.SetAmount(amount);
         }
 
         //Travel Allowance
-        public void SetTravelAllowancePTD(double Amount)
+        public void SetTravelAllowance(decimal amount)
         {
-            TravelAllowance.SetAmountPTD(Amount);
+            TravelAllowance.SetAmount(amount);
         }
 
-        public void SetTravelAllowanceYTD(double Amount)
+        public decimal GetTaxableNormalEarnings()
         {
-            TravelAllowance.SetAmountYTD(Amount);
+            decimal TotalNormalEarnings;
+            TotalNormalEarnings = Earnings.Amount + FringeBenefits.Amount + TravelAllowance.Amount_Taxable;
+            return TotalNormalEarnings;
         }
 
-
-        public double GetTaxableNormalEarningsYTD()
+        public void SetTotalTaxableNormalEarnings(decimal amount)
         {
-            double TotalNormalEarnings;
-            TotalNormalEarnings = Earnings.AmountYTD + FringeBenefits.AmountYTD + TravelAllowance.AmountYTD_Taxable;
-            TotalNormalEarningsYTD = TotalNormalEarnings;
-            return TotalNormalEarningsYTD;
+            TotalTaxableNormalEarnings = amount;
         }
     }
 }

@@ -13,31 +13,24 @@ namespace ConfigTax
     public class TaxElement //Base class (parent)
     {
         [ComVisible(true)]
-        public virtual double AmountPTD { get; set; }
-        public double AmountYTD { get; set; }
-        public double AmountPrevYTD { get; private set; }
+        public decimal Amount { get; set; }
+        public decimal AmountPrev { get; private set; }
 
         public TaxElement()
         {
-
         }
         
-        private double  calcPrevYTD()
-        {
-            double prevYTD;
+        //private double  calcPrevYTD()
+        //{
+        //    double prevYTD;
 
-            prevYTD = AmountYTD - AmountPTD;
-            return prevYTD;
-        }
+        //    prevYTD = AmountYTD - AmountPTD;
+        //    return prevYTD;
+        //}
      
-        public virtual void SetAmountPTD(double Amount)
+        public void SetAmount(decimal amount)
         {
-            AmountPTD = Amount;
-        }
-
-        public void SetAmountYTD(double Amount)
-        {
-            AmountYTD = Amount;
+            Amount = amount;
         }
 
 

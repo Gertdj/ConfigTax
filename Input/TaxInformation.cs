@@ -67,13 +67,31 @@ namespace ConfigTax
             PreTaxDeductions = preTaxDeductions;
         }
 
-        public double GetNormalEarningsAnnualised()
+        public decimal GetNormalEarningsAnnualised()
         {
-            var NormalEarn = NormalEarnings.GetTaxableNormalEarningsYTD();
+            var NormalEarn = NormalEarnings.GetTaxableNormalEarnings();
             
-            var NormEarnAnn = Annualise.Calc(1, NormalEarn, 30.416666666667, 365);
+            //Send Actual Days Worked if not full month 
+            var NormEarnAnn = Annualise.Calc(1, NormalEarn, Global.AveMonthDays, 365);
             return NormEarnAnn;
 
+        }
+
+        /// <summary>
+        /// Calculate Simple Tax by using Pre-Calculated Total figures 
+        /// </summary>
+        /// <param name="annualisationMethod">Specify the Annualisation Method</param>
+        /// <param name="daysWorked">Enter the total number of days worked in the Tax Year or Period</param>
+        /// <param name="normalEarnings">Amount of Total Normal Earnings for the Period</param>
+        /// <param name="annualEarnings">Amount of Total Annual Earnings for the Period</param>
+        /// <param name="preTaxDeductions">Amount of Total Pre-Tax Deductions for the Period</param>
+        public void CalculateTax(string annualisationMethod, decimal daysWorked, decimal normalEarnings,decimal annualEarnings,decimal preTaxDeductions)
+        {
+            Console.WriteLine(annualisationMethod);
+            Console.WriteLine(daysWorked);
+            Console.WriteLine(normalEarnings);
+            Console.WriteLine(annualEarnings);
+            Console.WriteLine(preTaxDeductions);
         }
     }
 }

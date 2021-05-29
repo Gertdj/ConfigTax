@@ -11,17 +11,17 @@ namespace ConfigTax
         //Properties
 
         static int annualisationMethod;
-        static double taxableNormalEarnings;
-        static double daysWorked;
+        static decimal taxableNormalEarnings;
+        static decimal daysWorked;
         static int daysInTheYear;
-        static double NormalEarningsAnnualised;
+        static decimal NormalEarningsAnnualised;
 
         //Constructor
         public Annualise()
         {
         }
 
-        public static double Calc(int AnnualisationMethod, double TaxableNormalEarnings, double DaysWorked, int DaysInTheYear)
+        public static decimal Calc(int AnnualisationMethod, decimal TaxableNormalEarnings, decimal DaysWorked, int DaysInTheYear)
         {
             annualisationMethod = AnnualisationMethod;
             taxableNormalEarnings = TaxableNormalEarnings;

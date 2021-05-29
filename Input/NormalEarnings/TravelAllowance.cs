@@ -11,30 +11,30 @@ namespace ConfigTax.Input
     [ClassInterface(ClassInterfaceType.AutoDual)]
     public class TravelAllowance:TaxElement
     {
-        public new double AmountYTD { get; set; }
-        public double AmountYTD_Taxable { get; private set; }
+ //       public new double Amount { get; set; }
+        public decimal Amount_Taxable { get; private set; }
 
         public TravelAllowance()
         {
            
         }
 
-        public void SetAmountYTD(double Amount)
+        public void SetAmount(decimal amount)
         {
-            AmountYTD = Amount;
-            CalcAmountYTD_Taxable();
+            Amount = amount;
+            CalcAmount_Taxable();
         }
 
-        private void CalcAmountYTD_Taxable()
+        private void CalcAmount_Taxable()
         {
             
-            if(AmountYTD != 0)
+            if(Amount != 0)
             {
-                AmountYTD_Taxable = AmountYTD * 0.8;
+                Amount_Taxable = Amount * (decimal)0.8;
             }
             else
             {
-                AmountYTD_Taxable = 0;
+                Amount_Taxable = 0;
             }
         }
     }

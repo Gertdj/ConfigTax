@@ -17,7 +17,7 @@ namespace ConfigTax
         public Bonus Bonus { get; set; }
         public Shares Shares { get; set; }
         public LeaveCommutation LeaveCommutation { get; set; }
-        public double TotalAnnualEarningsYTD { get; set; }
+        public decimal TotalAnnualEarnings { get; set; }
 
         //Constructor
         public AnnualEarnings()
@@ -48,44 +48,43 @@ namespace ConfigTax
 
         //Set Sub-Element values
         //Bonus
-        public void SetBonusPTD(double Amount)
+        public void SetBonus(decimal amount)
         {
-            Bonus.AmountPTD = Amount;
-        }
-
-        public void SetBonusYTD(double Amount)
-        {
-            Bonus.AmountYTD = Amount;
+            Bonus.Amount = amount;
         }
 
         //Shares
-        public void SetSharesPTD(double Amount)
+        public void SetShares(decimal amount)
         {
-            Shares.SetAmountPTD(Amount);
-        }
-
-        public void SetSharesYTD(double Amount)
-        {
-            Shares.SetAmountYTD(Amount);
+            Shares.SetAmount(amount);
         }
 
         //LeaveCommutation
-        public void SetLeaveCommutationPTD(double Amount)
+        public void SetLeaveCommutation(decimal amount)
         {
-            LeaveCommutation.SetAmountPTD(Amount);
+            LeaveCommutation.SetAmount(amount);
         }
 
-        public void SetLeaveCommutationYTD(double Amount)
+        /// <summary>
+        /// Sets TotalAnnualEarnings as the sum of all Annual Earnings Sub-Elements
+        /// </summary>
+        public void SetTotalAnnualEarningsSumOfElements()
         {
-            LeaveCommutation.AmountYTD = Amount;
+            TotalAnnualEarnings = Bonus.Amount + Shares.Amount + LeaveCommutation.Amount ;
         }
 
-
-        public double GetTotalAnnualEarningsYTD()
+        /// <summary>
+        /// Gets TotalAnnualEarnings
+        /// </summary>
+        /// <returns>TotalAnnualEarnings</returns>
+        public decimal GetTotalAnnualEarnings()
         {
-            double TotalAnnualEarnings;
-            TotalAnnualEarnings = Bonus.AmountYTD + Shares.AmountYTD + LeaveCommutation.AmountYTD ;
-            TotalAnnualEarningsYTD = TotalAnnualEarnings;
+            return TotalAnnualEarnings;
+        }
+
+        public decimal SetTotalAnnualEarnings(decimal amount)
+        {
+            TotalAnnualEarnings = amount;
             return TotalAnnualEarnings;
         }
     }

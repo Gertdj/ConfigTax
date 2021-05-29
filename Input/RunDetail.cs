@@ -14,7 +14,7 @@ namespace ConfigTax
     {
         [ComVisible(true)]
 
-        public const double AveWorkingDays = 30.416666666667;
+        //public const double AveWorkingDays = 30.416666666667;
         
         //Properties
         public DateTime HireDate { get; set; }
@@ -22,7 +22,7 @@ namespace ConfigTax
         public DateTime TaxStartDate { get; set; } //Official Tax StartDate
         public DateTime PayrollDate { get; set; }
         public DateTime TaxStart { get; set; } //Latest of HireDate and TaxStartDate
-        public double DaysWorked { get; set; }
+        public decimal DaysWorked { get; set; }
         public DateTime TaxPeriod { get; set; }
         public int TaxPeriodsRemaining { get; set; }
         public bool FullMonth { get; set; }
@@ -50,7 +50,7 @@ namespace ConfigTax
 
         public string GetDaysWorked()
         {
-            DaysWorked = (PayrollDate - TaxStart).TotalDays + 1;
+            DaysWorked = (decimal)(PayrollDate - TaxStart).TotalDays + 1;
             return DaysWorked.ToString();
         }
     }

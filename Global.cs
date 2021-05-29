@@ -4,10 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ConfigTaxWin
+namespace ConfigTax
 {
-    static class Global
+    public static class Global
     {
+        public const decimal AveMonthDays = 30.416666666667M;
+
         public enum AnnualisationMethod_enum
         {
             Average,

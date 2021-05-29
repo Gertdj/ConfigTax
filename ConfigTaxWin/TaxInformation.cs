@@ -16,7 +16,9 @@ namespace ConfigTaxWin
     {
         #region GlobalScope
 
-        ConfigTax.TaxInformation ti = new ConfigTax.TaxInformation();
+        public ConfigTax.TaxInformation ti = new ConfigTax.TaxInformation();
+        public string activeButton = "";
+
 
         #endregion
 
@@ -32,6 +34,16 @@ namespace ConfigTaxWin
         #region Load
         private void TaxInformation_Load(object sender, EventArgs e)
         {
+            //panelDates.BackColor = Color.FromArgb(100,0,0,0);
+            //panelNormalEarnings.BackColor = Color.FromArgb(100, 0, 0, 0);
+            //panelTax.BackColor = Color.FromArgb(100, 0, 0, 0);
+            //panelAnnualEarnings.BackColor = Color.FromArgb(100, 0, 0, 0);
+            //PanelPreTaxDeductions.BackColor = Color.FromArgb(100, 0, 0, 0);
+            //panelNormalEarningsDetail.BackColor = Color.FromArgb(100, 0, 0, 0);
+            //panelAnnualEarningsDetail.BackColor = Color.FromArgb(100, 0, 0, 0);
+            //panelPreTaxDetail.BackColor = Color.FromArgb(100, 0, 0, 0);
+
+
             //Active menu item
             panelLeft.Height = btnDashboard.Height;
             panelLeft.Top = btnDashboard.Top;
@@ -51,7 +63,11 @@ namespace ConfigTaxWin
             dtTaxYearStart.Value = DateTime.ParseExact("01-Mar-21", "dd-MMM-yy", CultureInfo.InvariantCulture);
 
             //Calculate DaysWorked
-            txtDaysWorked.Text = ti.RunDetail.GetDaysWorked();
+            var DaysWorked = (dtPayrollPeriod.Value - dtTaxYearStart.Value).TotalDays + 1;
+            txtDaysWorked.Text = DaysWorked.ToString();
+
+
+            #region OLD CODE1
 
             //Load initial data into Input Object
             ti.RunDetail.PayrollDate = dtPayrollPeriod.Value;
@@ -65,16 +81,16 @@ namespace ConfigTaxWin
 
             txtFullMonth.Text = "True";
 
-
+            #endregion
 
             #region AnnualisationMethod
 
-            
 
 
-            #endregion 
+
+            #endregion
         }
-        #endregion
+#endregion
 
         #region ClickEvents
 
@@ -114,39 +130,40 @@ namespace ConfigTaxWin
 
         private void btnDashboard_Click(object sender, EventArgs e)
         {
+            Panel panelParent = new Panel();
+            panelParent = panelInputParent;
+            panelParent.Visible = true;
+           
+
             panelLeft.Height = btnDashboard.Height;
             panelLeft.Top = btnDashboard.Top;
 
-            //Hide Input Panel
-            panelInputParent.Visible = false;
+            activeButton = "Dashboard";
+            SelectForm();
         }
 
         private void btnEmployee_Click(object sender, EventArgs e)
         {
             panelLeft.Height = btnEmployee.Height;
             panelLeft.Top = btnEmployee.Top;
-
-            //Hide Input Panel
-            panelInputParent.Visible = false;
+            activeButton = "EmployeeInput";
+            SelectForm();
         }
 
         private void btnLegislation_Click(object sender, EventArgs e)
         {
             panelLeft.Height = btnLegislation.Height;
             panelLeft.Top = btnLegislation.Top;
-
-            //Hide Input Panel
-            panelInputParent.Visible = false;
-
+            activeButton = "Legislation";
+            SelectForm();
         }
 
         private void btnTaxInput_Click(object sender, EventArgs e)
         {
             panelLeft.Height = btnTaxInput.Height;
             panelLeft.Top = btnTaxInput.Top;
-
-            //Hide Input Panel
-            panelInputParent.Visible = true;
+            activeButton = "TaxInput";
+            SelectForm();
         }
         private void btnExit_Click(object sender, EventArgs e)
         {
@@ -155,40 +172,51 @@ namespace ConfigTaxWin
 
         private void btnCalcTax_Click(object sender, EventArgs e)
         {
-            //dtTaxStartDate. = 01/03/21; 
 
-            DateTime dtTaxStart = new DateTime();
-            dtTaxStart = DateTime.Parse("01-Mar-21");
+            // ti.NormalEarnings.SetTotalTaxableNormalEarnings(Convert.ToDecimal(txtTotalTaxableNormalEarnings.Text));
+            // ti.AnnualEarnings.SetTotalAnnualEarnings(Convert.ToDecimal(txtTotalAnnualEarnings.Text));
 
-            //dtTaxStartDate.Value = DateTime.ParseExact("25/03/2017", "dd/MM/yyyy", CultureInfo.InvariantCulture);
+            ti.CalculateTax("Average", 30.41667M, 80000, 5000, 1000);
 
-            var ti = new ConfigTax.TaxInformation();
+            #region OLD CODE 2
+            ////dtTaxStartDate. = 01/03/21; 
 
-            ti.NormalEarnings.SetEarningsYTD(10000);
-            ti.NormalEarnings.SetTravelAllowanceYTD(1000);
+            //DateTime dtTaxStart = new DateTime();
+            //dtTaxStart = DateTime.Parse("01-Mar-21");
 
-            // ti.AnnualEarnings.SetBonusYTD(20000);
-            // ti.AnnualEarnings.SetSharesYTD(50000);
+            ////dtTaxStartDate.Value = DateTime.ParseExact("25/03/2017", "dd/MM/yyyy", CultureInfo.InvariantCulture);
+
+            ////var ti = new ConfigTax.TaxInformation();
+
+            //ti.NormalEarnings.SetEarnings(10000);
+            //ti.NormalEarnings.SetTravelAllowance(1000);
+
+            //// ti.AnnualEarnings.SetBonusYTD(20000);
+            //// ti.AnnualEarnings.SetSharesYTD(50000);
 
 
-            // var TotalAnnualYTD = ti.AnnualEarnings.GetTotalAnnualEarningsYTD();
-            // MessageBox.Show("TotalAnnEarnYTD: " + TotalAnnualYTD.ToString());
+            //// var TotalAnnualYTD = ti.AnnualEarnings.GetTotalAnnualEarningsYTD();
+            //// MessageBox.Show("TotalAnnEarnYTD: " + TotalAnnualYTD.ToString());
 
-            var TaxNormEarn = ti.NormalEarnings.GetTaxableNormalEarningsYTD();
-            MessageBox.Show(TaxNormEarn.ToString());
+            //var TaxNormEarn = ti.NormalEarnings.GetTaxableNormalEarnings();
+            //MessageBox.Show(TaxNormEarn.ToString());
 
-            var AnnNormEarn = Math.Round(ti.GetNormalEarningsAnnualised());
-            MessageBox.Show(AnnNormEarn.ToString());
+            //var AnnNormEarn = Math.Round(ti.GetNormalEarningsAnnualised());
+            //MessageBox.Show(AnnNormEarn.ToString());
 
-            ti.RunDetail.HireDate = dtHireDate.Value;
+            //ti.RunDetail.HireDate = dtHireDate.Value;
 
-            //var taxStartDate = ti.RunDetail.TaxStartDate;
-            //taxStartDate = "01-Mar-21";
+            ////var taxStartDate = ti.RunDetail.TaxStartDate;
+            ////taxStartDate = "01-Mar-21";
 
-            //DateTime dt = DateTime.Parse (taxStartDate);
+            ////DateTime dt = DateTime.Parse (taxStartDate);
 
-            var tsStr = dtHireDate.Text;
+            //var tsStr = dtHireDate.Text;
+
+            #endregion
         }
+
+
 
 
         #endregion
@@ -223,16 +251,14 @@ namespace ConfigTaxWin
 
         private void dtTaxYearStart_ValueChanged(object sender, EventArgs e)
         {
-            //Update Input Object
-            ti.RunDetail.TaxStartDate = dtTaxYearStart.Value;
-
             //Set Payroll Period and Range
             dtPayrollPeriod.MinDate = dtTaxYearStart.Value;
             dtPayrollPeriod.MaxDate = dtTaxYearStart.Value.AddMonths(11);
             dtPayrollPeriod.Value = dtTaxYearStart.Value;
             dtPayrollPeriod.Value = GetLastDay(dtPayrollPeriod.Value);
+            dtHireDate.Value = dtTaxYearStart.Value;
 
-            txtTaxStart.Text = ti.RunDetail.GetTaxStart();
+            txtTaxStart.Text = dtTaxYearStart.Value.ToString("dd-MMM-yy");
 
             //Update Employee Termination Date on the form
             var taxYearStart = dtTaxYearStart.Value;
@@ -245,6 +271,82 @@ namespace ConfigTaxWin
         #endregion
 
         #region Local Methods
+
+        private void SelectForm()
+        {
+            switch(activeButton)
+            {
+                case "Dashboard":
+                    HideAll();
+                    break;
+
+                case "EmployeeInput":
+                    HideAll();
+                    break;
+
+                case "Legislation":
+                    HideAll();
+                    break;
+
+                case "TaxInput":
+                    radioButtonSimple.Enabled = true;
+                    panelInputType.Visible = true;
+                    labelInputType.Visible = true;
+                    panelDates.Visible = true;
+                    panelNormalEarnings.Visible = true;
+                    panelAnnualEarnings.Visible = true;
+                    PanelPreTaxDeductions.Visible = true;
+                    
+                    panelTax.Top = 204;
+                    panelTax.Visible = true;
+
+                    break;
+            }
+  
+        }
+
+        private void SetInputTypeForms()
+        {
+            if (radioButtonSimple.Checked == true)
+            {
+                panelInputType.Visible = true;
+                labelInputType.Visible = true;
+
+                panelNormalEarningsDetail.Visible = false;
+                panelAnnualEarningsDetail.Visible = false;
+                panelPreTaxDetail.Visible = false;
+
+                panelTax.Top = 204;
+                panelInputParent.Visible = true;
+
+            }
+            else
+            {
+                panelNormalEarningsDetail.Visible = true;
+                panelAnnualEarningsDetail.Visible = true;
+                panelPreTaxDetail.Visible = true;
+                labelInputType.Visible = true;
+
+                panelTax.Top = 459;
+            }
+        }
+
+        private void HideAll()
+        {
+
+            panelDates.Visible = false;
+            panelInputType.Visible = false;
+            labelInputType.Visible = false;
+            panelNormalEarnings.Visible = false;
+            panelAnnualEarnings.Visible = false;
+            PanelPreTaxDeductions.Visible = false;
+            panelTax.Visible = false;
+
+            //            this.panelInputParent.Dispose();
+
+        }
+
+
         private DateTime GetLastDay(DateTime dateIn)
         {
             var lastDay = DateTime.DaysInMonth(dateIn.Year, dateIn.Month);
@@ -253,6 +355,10 @@ namespace ConfigTaxWin
             return fullDate;
         }
 
+        /// <summary>
+        /// Sets all labels for Input Fields (Normal Earnings) according to the Method of Annualisation
+        /// and clears the relevand Text fields for new input
+        /// </summary>
         private void setNormalEarnings()
         {
             //var dimension = "";
@@ -260,7 +366,7 @@ namespace ConfigTaxWin
             
             //Get new Normal Earnings Panel Object
             Panel panelNormalEarnings = new Panel();
-            panelNormalEarnings = PanelNormalEarnings;
+            panelNormalEarnings = this.panelNormalEarnings;
 
             switch (annMethod.ToString())
             {
@@ -270,6 +376,11 @@ namespace ConfigTaxWin
                         {
                         switch (control.Name)
                         {
+                            case "lblTotalTaxableNormalEarnings":
+                                lblTotalTaxableNormalEarnings.Text = "Total Normal Earnings (YTD)";
+                                txtTotalTaxableNormalEarnings.Text = "";
+                            break;
+
                             case "lblEarnings":
                                 lblEarnings.Text = "Earnings (YTD)";
                                 txtEarnings.Text = "";
@@ -337,6 +448,11 @@ namespace ConfigTaxWin
             }
         }
 
+        /// <summary>
+        /// Sets all labels for Input Fields (Pre-Tax Deductions) according to the Method of Annualisation
+        /// and clears the relevand Text fields for new input
+        /// </summary>
+
         private void setPreTaxDeductions()
         {
             var annMethod = Global.AnnualisationMethod;
@@ -353,6 +469,11 @@ namespace ConfigTaxWin
                     {
                         switch (control.Name)
                         {
+                            case "lblTotalPreTaxDeductions":
+                                lblTotalPreTaxDeductions.Text = "Total Pre-Tax Deductions (YTD)";
+                                txtTotalPreTaxDeductions.Text = "";
+                                break;
+
                             case "lblPension":
                                 lblPension.Text = "Pension (YTD)";
                                 txtPension.Text = "";
@@ -427,6 +548,97 @@ namespace ConfigTaxWin
 
 
 
+        }
+
+        private void txtEarnings_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter)
+            {
+                e.SuppressKeyPress = true;
+                SelectNextControl(ActiveControl, true, true, true, true);
+            }
+        }
+
+        private void txtFringeBenefits_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter)
+            {
+                e.SuppressKeyPress = true;
+                SelectNextControl(ActiveControl, true, true, true, true);
+            }
+        }
+
+        private void txtTravelAllowance_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter)
+            {
+                e.SuppressKeyPress = true;
+                SelectNextControl(ActiveControl, true, true, true, true);
+            }
+        }
+
+        private void txtTotalNormalEarnings_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter)
+            {
+                e.SuppressKeyPress = true;
+                SelectNextControl(ActiveControl, true, true, true, true);
+            }
+        }
+
+        private void txtTotalAnnualEarnings_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter)
+            {
+                e.SuppressKeyPress = true;
+                SelectNextControl(ActiveControl, true, true, true, true);
+            }
+        }
+
+        private void txtBonus_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter)
+            {
+                e.SuppressKeyPress = true;
+                SelectNextControl(ActiveControl, true, true, true, true);
+            }
+        }
+
+        private void txtShares_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter)
+            {
+                e.SuppressKeyPress = true;
+                SelectNextControl(ActiveControl, true, true, true, true);
+            }
+        }
+
+        private void txtPension_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter)
+            {
+                e.SuppressKeyPress = true;
+                SelectNextControl(ActiveControl, true, true, true, true);
+            }
+        }
+
+        private void txtAnnuities_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter)
+            {
+                e.SuppressKeyPress = true;
+                SelectNextControl(ActiveControl, true, true, true, true);
+            }
+        }
+
+        private void radioButtonSimple_CheckedChanged(object sender, EventArgs e)
+        {
+            SetInputTypeForms();
+        }
+
+        private void radioButtonDetail_CheckedChanged(object sender, EventArgs e)
+        {
+            SetInputTypeForms();
         }
     }
     #endregion

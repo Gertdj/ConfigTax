@@ -65,6 +65,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Global.cs" />
     <Compile Include="Input\Annualisation\Annualise.cs" />
     <Compile Include="Input\AnnualEarnings\AnnualEarnings.cs" />
     <Compile Include="Input\PreTaxDeductions\Annuity.cs" />

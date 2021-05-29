@@ -49,7 +49,6 @@
     <Compile Include="DateTimePickerEx.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Global.cs" />
     <Compile Include="MonthPicker.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -69,6 +68,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="TaxInformation.resx">
       <DependentUpon>TaxInformation.cs</DependentUpon>
@@ -91,6 +91,21 @@
       <Project>{4fc39059-2258-4ef6-b9a4-164465f59294}</Project>
       <Name>ConfigTax</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Calendar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\FarmSunset1.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\FarmSunset3.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\FarmSunset2.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\FarmSunset4.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
