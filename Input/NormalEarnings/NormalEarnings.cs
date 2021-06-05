@@ -17,8 +17,8 @@ namespace ConfigTax
         public Earnings Earnings { get; set; }
         public FringeBenefits FringeBenefits  { get; set; }
         public TravelAllowance TravelAllowance { get; set; }
-        public decimal TotalNormalEarnings { get; set; }
-        public decimal TotalTaxableNormalEarnings { get; set; }
+        public double TotalNormalEarnings { get; set; }
+        public static double TotalTaxableNormalEarnings { get; private set; }
 
         //Constructor
         public NormalEarnings()
@@ -50,33 +50,30 @@ namespace ConfigTax
 
         //Set Sub-Element values
         //Earnings
-        public void SetEarnings(decimal amount)
+        public void SetEarnings(double amount)
         {
             Earnings.Amount = amount;
         }
 
         //Shares
-        public void SetShares(decimal amount)
+        public void SetShares(double amount)
         {
             FringeBenefits.SetAmount(amount);
         }
 
         //Travel Allowance
-        public void SetTravelAllowance(decimal amount)
+        public void SetTravelAllowance(double amount)
         {
             TravelAllowance.SetAmount(amount);
         }
 
-        public decimal GetTaxableNormalEarnings()
+        public double GetTaxableNormalEarnings()
         {
-            decimal TotalNormalEarnings;
-            TotalNormalEarnings = Earnings.Amount + FringeBenefits.Amount + TravelAllowance.Amount_Taxable;
+            double taxableNormalEarnings;
+            taxableNormalEarnings = Earnings.Amount + FringeBenefits.Amount + TravelAllowance.Amount_Taxable;
             return TotalNormalEarnings;
         }
 
-        public void SetTotalTaxableNormalEarnings(decimal amount)
-        {
-            TotalTaxableNormalEarnings = amount;
-        }
+        public void SetTotalTaxableNormalEarnings(double amount) => TotalTaxableNormalEarnings = amount;
     }
 }

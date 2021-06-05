@@ -17,7 +17,7 @@ namespace ConfigTax
         public Bonus Bonus { get; set; }
         public Shares Shares { get; set; }
         public LeaveCommutation LeaveCommutation { get; set; }
-        public decimal TotalAnnualEarnings { get; set; }
+        public double TotalAnnualEarnings { get; private set; }
 
         //Constructor
         public AnnualEarnings()
@@ -48,19 +48,19 @@ namespace ConfigTax
 
         //Set Sub-Element values
         //Bonus
-        public void SetBonus(decimal amount)
+        public void SetBonus(double amount)
         {
             Bonus.Amount = amount;
         }
 
         //Shares
-        public void SetShares(decimal amount)
+        public void SetShares(double amount)
         {
             Shares.SetAmount(amount);
         }
 
         //LeaveCommutation
-        public void SetLeaveCommutation(decimal amount)
+        public void SetLeaveCommutation(double amount)
         {
             LeaveCommutation.SetAmount(amount);
         }
@@ -77,15 +77,11 @@ namespace ConfigTax
         /// Gets TotalAnnualEarnings
         /// </summary>
         /// <returns>TotalAnnualEarnings</returns>
-        public decimal GetTotalAnnualEarnings()
+        public double GetTotalAnnualEarnings()
         {
             return TotalAnnualEarnings;
         }
 
-        public decimal SetTotalAnnualEarnings(decimal amount)
-        {
-            TotalAnnualEarnings = amount;
-            return TotalAnnualEarnings;
-        }
+        public void SetTotalAnnualEarnings(double amount) => TotalAnnualEarnings = amount;
     }
 }

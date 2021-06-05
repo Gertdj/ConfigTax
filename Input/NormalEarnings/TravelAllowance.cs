@@ -12,14 +12,14 @@ namespace ConfigTax.Input
     public class TravelAllowance:TaxElement
     {
  //       public new double Amount { get; set; }
-        public decimal Amount_Taxable { get; private set; }
+        public double Amount_Taxable { get; private set; }
 
         public TravelAllowance()
         {
            
         }
 
-        public void SetAmount(decimal amount)
+        public void SetAmount(double amount)
         {
             Amount = amount;
             CalcAmount_Taxable();
@@ -30,7 +30,7 @@ namespace ConfigTax.Input
             
             if(Amount != 0)
             {
-                Amount_Taxable = Amount * (decimal)0.8;
+                Amount_Taxable = Amount * (double)0.8;
             }
             else
             {

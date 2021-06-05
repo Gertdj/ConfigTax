@@ -6,40 +6,35 @@ using System.Threading.Tasks;
 
 namespace ConfigTax
 {
-    public class Annualise
+    public static class Annualise
     {
         //Properties
 
-        static int annualisationMethod;
-        static decimal taxableNormalEarnings;
-        static decimal daysWorked;
-        static int daysInTheYear;
-        static decimal NormalEarningsAnnualised;
+        public static string AnnualisationMethod { get; set; }
+        public static double TaxableNormalEarnings { get; set; }
+        public static double DaysWorked { get; set; }
+        public static int DaysInTheYear { get; set; }
+        public static double MyProperty { get; set; }
+        public static double NormalEarningsAnnualised { get; set; }
 
         //Constructor
-        public Annualise()
+        static Annualise()
         {
         }
 
-        public static decimal Calc(int AnnualisationMethod, decimal TaxableNormalEarnings, decimal DaysWorked, int DaysInTheYear)
+        public static double GetNormalEarningsAnnualised(string AnnualisationMethod,double TaxableNormalEarnings,double DaysWorked, int DaysInTheYear)
         {
-            annualisationMethod = AnnualisationMethod;
-            taxableNormalEarnings = TaxableNormalEarnings;
-            daysWorked = DaysWorked;
-            daysInTheYear = DaysInTheYear;
-            
-
             switch (AnnualisationMethod)
             {
-                case 1:
-                    AverageMethod();
+                case "Average":
+                    AverageMethod(TaxableNormalEarnings, DaysWorked, DaysInTheYear);
                     break;
 
-                case 2:
+                case "Cumulative":
 
                     break;
 
-                case 3:
+                case "NonCumulative":
 
                     break; 
             }
@@ -47,9 +42,9 @@ namespace ConfigTax
             return NormalEarningsAnnualised;
         }
         
-        private static void AverageMethod()
+        private static void AverageMethod(double TaxableNormalEarnings, double DaysWorked, double DaysInTheYear)
         {
-            NormalEarningsAnnualised = (taxableNormalEarnings / daysWorked) * daysInTheYear;
+            NormalEarningsAnnualised = (TaxableNormalEarnings / DaysWorked) * DaysInTheYear;
         }
     }
 }

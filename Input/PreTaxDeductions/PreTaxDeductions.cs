@@ -14,10 +14,10 @@ namespace ConfigTax
     {
         //Properties
         [ComVisible(true)]
-        public Pension  Pension { get; set; }
-        public Annuity Annuity { get; set; }
-        public Relief Relief { get; set; }
-        public decimal TotalPreTaxDeductions { get; set; }
+        public Pension  Pension { get; private set; }
+        public Annuity Annuity { get; private set; }
+        public Relief Relief { get; private set; }
+        public double TotalPreTaxDeductions { get; private set; }
 
 
         //Constructor
@@ -50,27 +50,30 @@ namespace ConfigTax
         //Set Sub-Element values
         //Earnings
 
-        public void SetPension(decimal amount)
+        public void SetPension(double amount)
         {
             Pension.Amount = amount;
         }
 
-        public void SetAnnuity(decimal amount)
+        public void SetAnnuity(double amount)
         {
             Annuity.Amount = amount;
         }
 
-        public void SetRelief(decimal amount)
+
+        public void SetRelief(double amount)
         {
             Relief.Amount = amount;
         }
 
-        public decimal GetTotalPreTaxDeductions()
+        public double GetTotalPreTaxDeductions()
         {
-            decimal PreTaxDeductions;
+            double PreTaxDeductions;
             PreTaxDeductions = Relief.Amount + Annuity.Amount + Relief.Amount;
             TotalPreTaxDeductions = PreTaxDeductions;
             return TotalPreTaxDeductions;
         }
+
+        public void SetTotalPreTaxDeductions(double amount) => TotalPreTaxDeductions = amount;
     }
 }

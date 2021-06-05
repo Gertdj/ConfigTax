@@ -16,7 +16,7 @@ namespace ConfigTaxWin
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new TaxInformation());
+            Application.Run(new TaxInformationWin());
         }
     }
 }

@@ -52,11 +52,11 @@
     <Compile Include="MonthPicker.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="TaxInformation.cs">
+    <Compile Include="TaxInformationWin.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="TaxInformation.Designer.cs">
-      <DependentUpon>TaxInformation.cs</DependentUpon>
+    <Compile Include="TaxInformationWin.Designer.cs">
+      <DependentUpon>TaxInformationWin.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -70,8 +70,8 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="TaxInformation.resx">
-      <DependentUpon>TaxInformation.cs</DependentUpon>
+    <EmbeddedResource Include="TaxInformationWin.resx">
+      <DependentUpon>TaxInformationWin.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -87,12 +87,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ConfigTax.csproj">
-      <Project>{4fc39059-2258-4ef6-b9a4-164465f59294}</Project>
-      <Name>ConfigTax</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\Calendar.png" />
   </ItemGroup>
   <ItemGroup>
@@ -106,6 +100,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\FarmSunset4.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ConfigTax.csproj">
+      <Project>{4fc39059-2258-4ef6-b9a4-164465f59294}</Project>
+      <Name>ConfigTax</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

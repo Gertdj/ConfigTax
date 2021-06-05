@@ -16,7 +16,7 @@ namespace ConfigTaxTest
         [TestMethod]
         public void Test_SetEarnings()
         {
-            decimal amt;
+            double amt;
             TaxInformation ti = new TaxInformation();
             ti.NormalEarnings.Earnings.SetAmount(1000);
             amt = ti.NormalEarnings.Earnings.Amount;
@@ -26,7 +26,7 @@ namespace ConfigTaxTest
         [TestMethod]
         public void Test_SetTravelAllowancePTD()
         {
-            decimal amt;
+            double amt;
             TaxInformation ti = new TaxInformation();
             ti.NormalEarnings.TravelAllowance.SetAmount(1000);
             amt = ti.NormalEarnings.TravelAllowance.Amount;
@@ -36,7 +36,7 @@ namespace ConfigTaxTest
         [TestMethod]
         public void Test_CalcTravelAllowanceTaxable()
         {
-            decimal amt;
+            double amt;
             TaxInformation ti = new TaxInformation();
             ti.NormalEarnings.TravelAllowance.SetAmount(1000);
             amt = ti.NormalEarnings.TravelAllowance.Amount_Taxable;
@@ -46,7 +46,8 @@ namespace ConfigTaxTest
         [TestMethod]
         public void Test_Annualise_Average()
         {
-            var AnnualTaxable = Annualise.Calc  (1, 10000, 30.4166666666667M, 365);
+            TaxInformation ti = new TaxInformation();
+            var AnnualTaxable = ti.GetNormalEarningsAnnual(10000, 30.4166666666667, 365);
             Assert.AreEqual(Math.Round(AnnualTaxable), 120000);
         }
     }

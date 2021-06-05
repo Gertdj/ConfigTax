@@ -1,7 +1,7 @@
 ﻿
 namespace ConfigTaxWin
 {
-    partial class TaxInformation
+    partial class TaxInformationWin
     {
         /// <summary>
         /// Required designer variable.
@@ -81,11 +81,13 @@ namespace ConfigTaxWin
             this.txtTotalPreTaxDeductions = new System.Windows.Forms.TextBox();
             this.panelNormalEarnings = new System.Windows.Forms.Panel();
             this.panel11 = new System.Windows.Forms.Panel();
-            this.lblTotalTaxableNormalEarnings = new System.Windows.Forms.Label();
-            this.txtTotalTaxableNormalEarnings = new System.Windows.Forms.TextBox();
+            this.lblTotalNormalEarnings = new System.Windows.Forms.Label();
+            this.txtTotalNormalEarnings = new System.Windows.Forms.TextBox();
             this.panel8 = new System.Windows.Forms.Panel();
             this.label11 = new System.Windows.Forms.Label();
             this.panelDates = new System.Windows.Forms.Panel();
+            this.label14 = new System.Windows.Forms.Label();
+            this.txtPeriodsWorked = new System.Windows.Forms.TextBox();
             this.panel7 = new System.Windows.Forms.Panel();
             this.label9 = new System.Windows.Forms.Label();
             this.dtPayrollPeriod = new ConfigTaxWin.MonthPicker();
@@ -94,8 +96,8 @@ namespace ConfigTaxWin
             this.dtTerminationDate = new System.Windows.Forms.DateTimePicker();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.txtTaxStart = new System.Windows.Forms.TextBox();
-            this.label10 = new System.Windows.Forms.Label();
+            this.txtTaxStartActual = new System.Windows.Forms.TextBox();
+            this.lblDaysWorked = new System.Windows.Forms.Label();
             this.dtHireDate = new System.Windows.Forms.DateTimePicker();
             this.dtTaxYearStart = new System.Windows.Forms.DateTimePicker();
             this.label2 = new System.Windows.Forms.Label();
@@ -286,6 +288,7 @@ namespace ConfigTaxWin
             this.btnCalcTax.Name = "btnCalcTax";
             this.btnCalcTax.Size = new System.Drawing.Size(209, 47);
             this.btnCalcTax.TabIndex = 130;
+            this.btnCalcTax.TabStop = false;
             this.btnCalcTax.Text = "Calculate Tax";
             this.btnCalcTax.UseVisualStyleBackColor = false;
             this.btnCalcTax.Click += new System.EventHandler(this.btnCalcTax_Click);
@@ -641,6 +644,9 @@ namespace ConfigTaxWin
             this.txtPreviousTax.Name = "txtPreviousTax";
             this.txtPreviousTax.Size = new System.Drawing.Size(204, 25);
             this.txtPreviousTax.TabIndex = 103;
+            this.txtPreviousTax.TabStop = false;
+            this.txtPreviousTax.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtPreviousTax_KeyDown);
+            this.txtPreviousTax.Leave += new System.EventHandler(this.txtPreviousTax_Leave);
             // 
             // label27
             // 
@@ -679,7 +685,7 @@ namespace ConfigTaxWin
             // lblTotalPreTaxDeductions
             // 
             this.lblTotalPreTaxDeductions.AutoSize = true;
-            this.lblTotalPreTaxDeductions.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(44)))), ((int)(((byte)(51)))));
+            this.lblTotalPreTaxDeductions.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.lblTotalPreTaxDeductions.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTotalPreTaxDeductions.ForeColor = System.Drawing.SystemColors.ControlDark;
             this.lblTotalPreTaxDeductions.Location = new System.Drawing.Point(31, 62);
@@ -717,14 +723,16 @@ namespace ConfigTaxWin
             this.txtTotalPreTaxDeductions.Name = "txtTotalPreTaxDeductions";
             this.txtTotalPreTaxDeductions.Size = new System.Drawing.Size(204, 25);
             this.txtTotalPreTaxDeductions.TabIndex = 12;
+            this.txtTotalPreTaxDeductions.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtBonus_KeyDown);
+            this.txtTotalPreTaxDeductions.Leave += new System.EventHandler(this.txtTotalPreTaxDeductions_Leave);
             // 
             // panelNormalEarnings
             // 
             this.panelNormalEarnings.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.panelNormalEarnings.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panelNormalEarnings.Controls.Add(this.panel11);
-            this.panelNormalEarnings.Controls.Add(this.lblTotalTaxableNormalEarnings);
-            this.panelNormalEarnings.Controls.Add(this.txtTotalTaxableNormalEarnings);
+            this.panelNormalEarnings.Controls.Add(this.lblTotalNormalEarnings);
+            this.panelNormalEarnings.Controls.Add(this.txtTotalNormalEarnings);
             this.panelNormalEarnings.Controls.Add(this.panel8);
             this.panelNormalEarnings.Location = new System.Drawing.Point(321, 17);
             this.panelNormalEarnings.Name = "panelNormalEarnings";
@@ -740,29 +748,31 @@ namespace ConfigTaxWin
             this.panel11.Size = new System.Drawing.Size(261, 4);
             this.panel11.TabIndex = 39;
             // 
-            // lblTotalTaxableNormalEarnings
+            // lblTotalNormalEarnings
             // 
-            this.lblTotalTaxableNormalEarnings.AutoSize = true;
-            this.lblTotalTaxableNormalEarnings.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(44)))), ((int)(((byte)(51)))));
-            this.lblTotalTaxableNormalEarnings.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTotalTaxableNormalEarnings.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.lblTotalTaxableNormalEarnings.Location = new System.Drawing.Point(34, 62);
-            this.lblTotalTaxableNormalEarnings.Name = "lblTotalTaxableNormalEarnings";
-            this.lblTotalTaxableNormalEarnings.Size = new System.Drawing.Size(192, 17);
-            this.lblTotalTaxableNormalEarnings.TabIndex = 38;
-            this.lblTotalTaxableNormalEarnings.Text = "Total Taxable Normal Earnings";
+            this.lblTotalNormalEarnings.AutoSize = true;
+            this.lblTotalNormalEarnings.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.lblTotalNormalEarnings.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTotalNormalEarnings.ForeColor = System.Drawing.SystemColors.ControlDark;
+            this.lblTotalNormalEarnings.Location = new System.Drawing.Point(34, 62);
+            this.lblTotalNormalEarnings.Name = "lblTotalNormalEarnings";
+            this.lblTotalNormalEarnings.Size = new System.Drawing.Size(181, 17);
+            this.lblTotalNormalEarnings.TabIndex = 38;
+            this.lblTotalNormalEarnings.Text = "Total Normal Earnings (YTD)";
             // 
-            // txtTotalTaxableNormalEarnings
+            // txtTotalNormalEarnings
             // 
-            this.txtTotalTaxableNormalEarnings.BackColor = System.Drawing.Color.Silver;
-            this.txtTotalTaxableNormalEarnings.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtTotalTaxableNormalEarnings.Font = new System.Drawing.Font("Tahoma", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTotalTaxableNormalEarnings.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.txtTotalTaxableNormalEarnings.Location = new System.Drawing.Point(34, 85);
-            this.txtTotalTaxableNormalEarnings.Name = "txtTotalTaxableNormalEarnings";
-            this.txtTotalTaxableNormalEarnings.Size = new System.Drawing.Size(204, 25);
-            this.txtTotalTaxableNormalEarnings.TabIndex = 10;
-            this.txtTotalTaxableNormalEarnings.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtTotalNormalEarnings_KeyDown);
+            this.txtTotalNormalEarnings.BackColor = System.Drawing.Color.Silver;
+            this.txtTotalNormalEarnings.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtTotalNormalEarnings.Font = new System.Drawing.Font("Tahoma", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtTotalNormalEarnings.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.txtTotalNormalEarnings.Location = new System.Drawing.Point(34, 85);
+            this.txtTotalNormalEarnings.Name = "txtTotalNormalEarnings";
+            this.txtTotalNormalEarnings.Size = new System.Drawing.Size(204, 25);
+            this.txtTotalNormalEarnings.TabIndex = 10;
+            this.txtTotalNormalEarnings.TabStop = false;
+            this.txtTotalNormalEarnings.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtTotalNormalEarnings_KeyDown);
+            this.txtTotalNormalEarnings.Leave += new System.EventHandler(this.txtTotalTaxableNormalEarnings_Leave);
             // 
             // panel8
             // 
@@ -787,6 +797,8 @@ namespace ConfigTaxWin
             // 
             this.panelDates.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.panelDates.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelDates.Controls.Add(this.label14);
+            this.panelDates.Controls.Add(this.txtPeriodsWorked);
             this.panelDates.Controls.Add(this.panel7);
             this.panelDates.Controls.Add(this.dtPayrollPeriod);
             this.panelDates.Controls.Add(this.label8);
@@ -794,8 +806,8 @@ namespace ConfigTaxWin
             this.panelDates.Controls.Add(this.dtTerminationDate);
             this.panelDates.Controls.Add(this.label7);
             this.panelDates.Controls.Add(this.label6);
-            this.panelDates.Controls.Add(this.txtTaxStart);
-            this.panelDates.Controls.Add(this.label10);
+            this.panelDates.Controls.Add(this.txtTaxStartActual);
+            this.panelDates.Controls.Add(this.lblDaysWorked);
             this.panelDates.Controls.Add(this.dtHireDate);
             this.panelDates.Controls.Add(this.dtTaxYearStart);
             this.panelDates.Controls.Add(this.label2);
@@ -807,6 +819,30 @@ namespace ConfigTaxWin
             this.panelDates.Size = new System.Drawing.Size(263, 560);
             this.panelDates.TabIndex = 28;
             this.panelDates.Visible = false;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label14.ForeColor = System.Drawing.SystemColors.ControlDark;
+            this.label14.Location = new System.Drawing.Point(119, 421);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(105, 17);
+            this.label14.TabIndex = 36;
+            this.label14.Text = "Periods Worked";
+            // 
+            // txtPeriodsWorked
+            // 
+            this.txtPeriodsWorked.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(44)))), ((int)(((byte)(51)))));
+            this.txtPeriodsWorked.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtPeriodsWorked.Enabled = false;
+            this.txtPeriodsWorked.Font = new System.Drawing.Font("Century Gothic", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtPeriodsWorked.ForeColor = System.Drawing.Color.White;
+            this.txtPeriodsWorked.Location = new System.Drawing.Point(122, 441);
+            this.txtPeriodsWorked.Name = "txtPeriodsWorked";
+            this.txtPeriodsWorked.Size = new System.Drawing.Size(96, 25);
+            this.txtPeriodsWorked.TabIndex = 35;
+            this.txtPeriodsWorked.TabStop = false;
             // 
             // panel7
             // 
@@ -842,11 +878,11 @@ namespace ConfigTaxWin
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label8.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.label8.Location = new System.Drawing.Point(39, 491);
+            this.label8.Location = new System.Drawing.Point(41, 421);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(70, 17);
+            this.label8.Size = new System.Drawing.Size(69, 17);
             this.label8.TabIndex = 34;
-            this.label8.Text = "Full Month";
+            this.label8.Text = "Full Period";
             // 
             // txtFullMonth
             // 
@@ -855,9 +891,9 @@ namespace ConfigTaxWin
             this.txtFullMonth.Enabled = false;
             this.txtFullMonth.Font = new System.Drawing.Font("Century Gothic", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtFullMonth.ForeColor = System.Drawing.Color.White;
-            this.txtFullMonth.Location = new System.Drawing.Point(43, 511);
+            this.txtFullMonth.Location = new System.Drawing.Point(44, 441);
             this.txtFullMonth.Name = "txtFullMonth";
-            this.txtFullMonth.Size = new System.Drawing.Size(174, 25);
+            this.txtFullMonth.Size = new System.Drawing.Size(72, 25);
             this.txtFullMonth.TabIndex = 33;
             this.txtFullMonth.TabStop = false;
             // 
@@ -871,13 +907,14 @@ namespace ConfigTaxWin
             this.dtTerminationDate.Name = "dtTerminationDate";
             this.dtTerminationDate.Size = new System.Drawing.Size(174, 25);
             this.dtTerminationDate.TabIndex = 31;
+            this.dtTerminationDate.ValueChanged += new System.EventHandler(this.dtTerminationDate_ValueChanged);
             // 
             // label7
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.label7.Location = new System.Drawing.Point(40, 211);
+            this.label7.Location = new System.Drawing.Point(41, 210);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(113, 17);
             this.label7.TabIndex = 32;
@@ -888,36 +925,36 @@ namespace ConfigTaxWin
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.label6.Location = new System.Drawing.Point(39, 350);
+            this.label6.Location = new System.Drawing.Point(41, 350);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(65, 17);
+            this.label6.Size = new System.Drawing.Size(106, 17);
             this.label6.TabIndex = 30;
-            this.label6.Text = "Tax Start";
+            this.label6.Text = "Tax Start Actual";
             // 
-            // txtTaxStart
+            // txtTaxStartActual
             // 
-            this.txtTaxStart.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(44)))), ((int)(((byte)(51)))));
-            this.txtTaxStart.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtTaxStart.Enabled = false;
-            this.txtTaxStart.Font = new System.Drawing.Font("Century Gothic", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTaxStart.ForeColor = System.Drawing.Color.White;
-            this.txtTaxStart.Location = new System.Drawing.Point(43, 370);
-            this.txtTaxStart.Name = "txtTaxStart";
-            this.txtTaxStart.Size = new System.Drawing.Size(174, 25);
-            this.txtTaxStart.TabIndex = 29;
-            this.txtTaxStart.TabStop = false;
-            this.txtTaxStart.TextChanged += new System.EventHandler(this.txtTaxStart_TextChanged);
+            this.txtTaxStartActual.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(44)))), ((int)(((byte)(51)))));
+            this.txtTaxStartActual.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtTaxStartActual.Enabled = false;
+            this.txtTaxStartActual.Font = new System.Drawing.Font("Century Gothic", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtTaxStartActual.ForeColor = System.Drawing.Color.White;
+            this.txtTaxStartActual.Location = new System.Drawing.Point(43, 370);
+            this.txtTaxStartActual.Name = "txtTaxStartActual";
+            this.txtTaxStartActual.Size = new System.Drawing.Size(174, 25);
+            this.txtTaxStartActual.TabIndex = 29;
+            this.txtTaxStartActual.TabStop = false;
+            this.txtTaxStartActual.TextChanged += new System.EventHandler(this.txtTaxStart_TextChanged);
             // 
-            // label10
+            // lblDaysWorked
             // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.label10.Location = new System.Drawing.Point(39, 418);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(92, 17);
-            this.label10.TabIndex = 28;
-            this.label10.Text = "Days Worked";
+            this.lblDaysWorked.AutoSize = true;
+            this.lblDaysWorked.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDaysWorked.ForeColor = System.Drawing.SystemColors.ControlDark;
+            this.lblDaysWorked.Location = new System.Drawing.Point(41, 491);
+            this.lblDaysWorked.Name = "lblDaysWorked";
+            this.lblDaysWorked.Size = new System.Drawing.Size(92, 17);
+            this.lblDaysWorked.TabIndex = 28;
+            this.lblDaysWorked.Text = "Days Worked";
             // 
             // dtHireDate
             // 
@@ -951,7 +988,7 @@ namespace ConfigTaxWin
             this.label2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.label2.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.label2.Location = new System.Drawing.Point(39, 135);
+            this.label2.Location = new System.Drawing.Point(41, 134);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(64, 17);
             this.label2.TabIndex = 19;
@@ -964,9 +1001,9 @@ namespace ConfigTaxWin
             this.txtDaysWorked.Enabled = false;
             this.txtDaysWorked.Font = new System.Drawing.Font("Century Gothic", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtDaysWorked.ForeColor = System.Drawing.Color.White;
-            this.txtDaysWorked.Location = new System.Drawing.Point(43, 438);
+            this.txtDaysWorked.Location = new System.Drawing.Point(43, 511);
             this.txtDaysWorked.Name = "txtDaysWorked";
-            this.txtDaysWorked.Size = new System.Drawing.Size(174, 25);
+            this.txtDaysWorked.Size = new System.Drawing.Size(175, 25);
             this.txtDaysWorked.TabIndex = 27;
             this.txtDaysWorked.TabStop = false;
             // 
@@ -975,7 +1012,7 @@ namespace ConfigTaxWin
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.label3.Location = new System.Drawing.Point(39, 281);
+            this.label3.Location = new System.Drawing.Point(41, 281);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(90, 17);
             this.label3.TabIndex = 20;
@@ -1036,6 +1073,8 @@ namespace ConfigTaxWin
             this.txtTotalAnnualEarnings.Name = "txtTotalAnnualEarnings";
             this.txtTotalAnnualEarnings.Size = new System.Drawing.Size(204, 25);
             this.txtTotalAnnualEarnings.TabIndex = 113;
+            this.txtTotalAnnualEarnings.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtTotalAnnualEarnings_KeyDown);
+            this.txtTotalAnnualEarnings.Leave += new System.EventHandler(this.txtTotalAnnualEarnings_Leave);
             // 
             // panel9
             // 
@@ -1102,7 +1141,7 @@ namespace ConfigTaxWin
             this.labelInputType.Text = "Input Type";
             this.labelInputType.Visible = false;
             // 
-            // TaxInformation
+            // TaxInformationWin
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(44)))), ((int)(((byte)(51)))));
@@ -1125,11 +1164,12 @@ namespace ConfigTaxWin
             this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(120)))), ((int)(((byte)(138)))));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
-            this.Name = "TaxInformation";
+            this.Name = "TaxInformationWin";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = " ";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.TaxInformation_Load);
+            this.Paint += new System.Windows.Forms.PaintEventHandler(this.TaxInformation_Paint);
             this.panel1.ResumeLayout(false);
             this.panelTop.ResumeLayout(false);
             this.panelTop.PerformLayout();
@@ -1197,8 +1237,8 @@ namespace ConfigTaxWin
         private System.Windows.Forms.DateTimePicker dtTerminationDate;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox txtTaxStart;
-        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.TextBox txtTaxStartActual;
+        private System.Windows.Forms.Label lblDaysWorked;
         private System.Windows.Forms.DateTimePicker dtHireDate;
         private System.Windows.Forms.DateTimePicker dtTaxYearStart;
         private System.Windows.Forms.Label label2;
@@ -1223,8 +1263,8 @@ namespace ConfigTaxWin
         private System.Windows.Forms.Label label27;
         private System.Windows.Forms.Label lblTotalPreTaxDeductions;
         private System.Windows.Forms.TextBox txtTotalPreTaxDeductions;
-        private System.Windows.Forms.Label lblTotalTaxableNormalEarnings;
-        private System.Windows.Forms.TextBox txtTotalTaxableNormalEarnings;
+        private System.Windows.Forms.Label lblTotalNormalEarnings;
+        private System.Windows.Forms.TextBox txtTotalNormalEarnings;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.TextBox txtTotalAnnualEarnings;
         private System.Windows.Forms.Panel panelNormalEarningsDetail;
@@ -1253,5 +1293,7 @@ namespace ConfigTaxWin
         private System.Windows.Forms.Panel panelInputType;
         private System.Windows.Forms.Label labelInputType;
         private System.Windows.Forms.Panel panel13;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.TextBox txtPeriodsWorked;
     }
 }

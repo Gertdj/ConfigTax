@@ -13,8 +13,8 @@ namespace ConfigTax
     public class TaxElement //Base class (parent)
     {
         [ComVisible(true)]
-        public decimal Amount { get; set; }
-        public decimal AmountPrev { get; private set; }
+        public double Amount { get; set; }
+        public double AmountPrev { get; private set; }
 
         public TaxElement()
         {
@@ -28,7 +28,7 @@ namespace ConfigTax
         //    return prevYTD;
         //}
      
-        public void SetAmount(decimal amount)
+        public void SetAmount(double amount)
         {
             Amount = amount;
         }

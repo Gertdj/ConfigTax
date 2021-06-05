@@ -8,7 +8,7 @@ namespace ConfigTax
 {
     public static class Global
     {
-        public const decimal AveMonthDays = 30.416666666667M;
+        public const double AveMonthDays = 30.416666666667;
 
         public enum AnnualisationMethod_enum
         {

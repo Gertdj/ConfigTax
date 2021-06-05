@@ -12,7 +12,7 @@ using ConfigTax;
 
 namespace ConfigTaxWin
 {
-    public partial class TaxInformation : Form
+    public partial class TaxInformationWin : Form
     {
         #region GlobalScope
 
@@ -23,7 +23,7 @@ namespace ConfigTaxWin
         #endregion
 
         #region Constructor
-        public TaxInformation()
+        public TaxInformationWin()
         {
             InitializeComponent();
             setNormalEarnings();
@@ -62,33 +62,17 @@ namespace ConfigTaxWin
             //Set TaxYear StarDate 
             dtTaxYearStart.Value = DateTime.ParseExact("01-Mar-21", "dd-MMM-yy", CultureInfo.InvariantCulture);
 
-            //Calculate DaysWorked
-            var DaysWorked = (dtPayrollPeriod.Value - dtTaxYearStart.Value).TotalDays + 1;
-            txtDaysWorked.Text = DaysWorked.ToString();
+            ////Calculate DaysWorked
+            //var DaysWorked = (dtPayrollPeriod.Value - dtTaxYearStart.Value).TotalDays + 1;
+            //txtDaysWorked.Text = DaysWorked.ToString();
 
-
-            #region OLD CODE1
-
-            //Load initial data into Input Object
-            ti.RunDetail.PayrollDate = dtPayrollPeriod.Value;
-            ti.RunDetail.HireDate = dtHireDate.Value;
-            ti.RunDetail.TaxStartDate = dtTaxYearStart.Value;
-
-            txtTaxStart.Text = ti.RunDetail.GetTaxStart();
-
-            var daysworked = (dtPayrollPeriod.Value - dtTaxYearStart.Value).TotalDays + 1;
-            txtDaysWorked.Text = daysworked.ToString();
-
-            txtFullMonth.Text = "True";
-
-            #endregion
-
-            #region AnnualisationMethod
+            //Calculate Periods Worked
 
 
 
-
-            #endregion
+            //Calculated Full Period Worked
+            txtFullMonth.Text = IsFullPeriod();
+ 
         }
 #endregion
 
@@ -165,6 +149,7 @@ namespace ConfigTaxWin
             activeButton = "TaxInput";
             SelectForm();
         }
+
         private void btnExit_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -172,79 +157,92 @@ namespace ConfigTaxWin
 
         private void btnCalcTax_Click(object sender, EventArgs e)
         {
+            LoadData();
 
-            // ti.NormalEarnings.SetTotalTaxableNormalEarnings(Convert.ToDecimal(txtTotalTaxableNormalEarnings.Text));
-            // ti.AnnualEarnings.SetTotalAnnualEarnings(Convert.ToDecimal(txtTotalAnnualEarnings.Text));
-
-            ti.CalculateTax("Average", 30.41667M, 80000, 5000, 1000);
-
-            #region OLD CODE 2
-            ////dtTaxStartDate. = 01/03/21; 
-
-            //DateTime dtTaxStart = new DateTime();
-            //dtTaxStart = DateTime.Parse("01-Mar-21");
-
-            ////dtTaxStartDate.Value = DateTime.ParseExact("25/03/2017", "dd/MM/yyyy", CultureInfo.InvariantCulture);
-
-            ////var ti = new ConfigTax.TaxInformation();
-
-            //ti.NormalEarnings.SetEarnings(10000);
-            //ti.NormalEarnings.SetTravelAllowance(1000);
-
-            //// ti.AnnualEarnings.SetBonusYTD(20000);
-            //// ti.AnnualEarnings.SetSharesYTD(50000);
-
-
-            //// var TotalAnnualYTD = ti.AnnualEarnings.GetTotalAnnualEarningsYTD();
-            //// MessageBox.Show("TotalAnnEarnYTD: " + TotalAnnualYTD.ToString());
-
-            //var TaxNormEarn = ti.NormalEarnings.GetTaxableNormalEarnings();
-            //MessageBox.Show(TaxNormEarn.ToString());
-
-            //var AnnNormEarn = Math.Round(ti.GetNormalEarningsAnnualised());
-            //MessageBox.Show(AnnNormEarn.ToString());
-
-            //ti.RunDetail.HireDate = dtHireDate.Value;
-
-            ////var taxStartDate = ti.RunDetail.TaxStartDate;
-            ////taxStartDate = "01-Mar-21";
-
-            ////DateTime dt = DateTime.Parse (taxStartDate);
-
-            //var tsStr = dtHireDate.Text;
-
-            #endregion
+            double annualTaxableEarnings = ti.GetNormalEarningsAnnualised(1000);
+            MessageBox.Show("Annual Taxable Earnings: " + annualTaxableEarnings.ToString());
         }
 
+        private void txtTotalNormalEarnings_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter)
+            {
+                e.SuppressKeyPress = true;
+                this.ActiveControl = txtTotalAnnualEarnings;
+            }
+        }
 
+        private void txtTotalAnnualEarnings_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter)
+            {
+                e.SuppressKeyPress = true;
+                this.ActiveControl = txtTotalPreTaxDeductions;
+            }
+        }
 
+        private void txtBonus_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter)
+            {
+                e.SuppressKeyPress = true;
+                this.ActiveControl = txtPreviousTax;
+            }
+        }
+
+        private void txtPreviousTax_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter)
+            {
+                e.SuppressKeyPress = true;
+                this.ActiveControl = btnCalcTax;
+                //   btnCalcTax.PerformClick();
+            }
+        }
 
         #endregion
 
         #region ValueChangeEvevts
+
         private void dtHireDate_ValueChanged(object sender, EventArgs e)
         {
-            ti.RunDetail.HireDate = dtHireDate.Value;
-            txtTaxStart.Text = ti.RunDetail.GetTaxStart();
+            txtTaxStartActual.Text = ti.RunDetail.GetTaxStart(dtHireDate.Value, dtTaxYearStart.Value);
+            txtFullMonth.Text = IsFullPeriod();
+
+            //var daysWorked = ti.RunDetail.GetDaysWorked(dtPayrollPeriod.Value, DateTime.ParseExact(txtTaxStartActual.Text, "dd-MMM-yy", CultureInfo.InvariantCulture));
+            //txtDaysWorked.Text = daysWorked.ToString();
+
+            btnCalcTax.Focus();
+        }
+
+        private void dtTerminationDate_ValueChanged(object sender, EventArgs e)
+        {
+            var daysWorked = ti.RunDetail.GetDaysWorked(dtTerminationDate.Value, DateTime.ParseExact(txtTaxStartActual.Text, "dd-MMM-yy", CultureInfo.InvariantCulture));
+            txtDaysWorked.Text = daysWorked.ToString();
+
+            txtFullMonth.Text = IsFullPeriod();
+
             btnCalcTax.Focus();
         }
 
         private void txtTaxStart_TextChanged(object sender, EventArgs e)
         {
-            DateTime dt = Convert.ToDateTime(txtTaxStart.Text);
+            DateTime dt = Convert.ToDateTime(txtTaxStartActual.Text);
             var daysworked = (dtPayrollPeriod.Value - dt).TotalDays + 1;
             txtDaysWorked.Text = daysworked.ToString();
         }
 
         private void dtPayrollPeriod_ValueChanged(object sender, EventArgs e)
         {
+            txtFullMonth.Text = IsFullPeriod();
+
             dtPayrollPeriod.Value = GetLastDay(dtPayrollPeriod.Value);
 
-            if (txtTaxStart.Text.Length > 0)
+            if (txtTaxStartActual.Text.Length > 0)
             {
-                DateTime taxStart = Convert.ToDateTime(txtTaxStart.Text);
-                var daysworked = (dtPayrollPeriod.Value - taxStart).TotalDays + 1;
-                txtDaysWorked.Text = daysworked.ToString();
+                DateTime taxStartActual = Convert.ToDateTime(txtTaxStartActual.Text);
+                var daysWorked = ti.RunDetail.GetDaysWorked(dtPayrollPeriod.Value, taxStartActual);
+//                txtDaysWorked.Text = daysWorked.ToString();
                 btnCalcTax.Focus();
             }
         }
@@ -258,7 +256,7 @@ namespace ConfigTaxWin
             dtPayrollPeriod.Value = GetLastDay(dtPayrollPeriod.Value);
             dtHireDate.Value = dtTaxYearStart.Value;
 
-            txtTaxStart.Text = dtTaxYearStart.Value.ToString("dd-MMM-yy");
+            txtTaxStartActual.Text = dtTaxYearStart.Value.ToString("dd-MMM-yy");
 
             //Update Employee Termination Date on the form
             var taxYearStart = dtTaxYearStart.Value;
@@ -268,9 +266,61 @@ namespace ConfigTaxWin
             dtTerminationDate.Value = empTerminationDate;
         }
 
+        private void radioButtonSimple_CheckedChanged(object sender, EventArgs e)
+        {
+            SetInputTypeForms();
+        }
+
+        private void radioButtonDetail_CheckedChanged(object sender, EventArgs e)
+        {
+            SetInputTypeForms();
+        }
+
         #endregion
 
         #region Local Methods
+
+        private void LoadData()
+        {
+            //Run Detail
+            ti.RunDetail.TaxYearStart = dtTaxYearStart.Value;
+            ti.RunDetail.HireDate = dtHireDate.Value;
+            ti.RunDetail.TerminationDate = dtTerminationDate.Value;
+            ti.RunDetail.PayrollDate = dtPayrollPeriod.Value;
+            ti.RunDetail.FullMonth = true;
+
+            if (this.radioButtonSimple.Checked == true)
+            {
+                ti.RunDetail.CalculationType = "Simple";
+            } 
+            else
+            {
+                ti.RunDetail.CalculationType = "Detailed";
+            }
+
+            DateTime dt = DateTime.ParseExact(txtTaxStartActual.Text, "dd-MMM-yy", CultureInfo.InvariantCulture);
+            ti.RunDetail.TaxStartActual = dt;
+
+            ti.RunDetail.DaysWorked = double.Parse(txtDaysWorked.Text);
+
+
+            //txtFullMonth.Text = "True";
+            //bool mybool = bool.Parse(txtFullMonth.Text);
+            //ti.RunDetail.FullMonth = mybool;
+
+
+            //Normal Earnings
+            ti.NormalEarnings.SetTotalTaxableNormalEarnings(Helper.Nz_TextToDouble(txtTotalNormalEarnings.Text));
+
+            //Annual Earnings
+            ti.AnnualEarnings.SetTotalAnnualEarnings(Helper.Nz_TextToDouble(txtTotalAnnualEarnings.Text));
+
+            //Pre-Tax Deductions
+            ti.PreTaxDeductions.SetTotalPreTaxDeductions(Helper.Nz_TextToDouble(txtTotalPreTaxDeductions.Text));
+            
+            //Previous Tax Deductions
+            ti.Tax.PreviousTax = Helper.Nz_TextToDouble(txtPreviousTax.Text);
+        }
 
         private void SelectForm()
         {
@@ -346,7 +396,6 @@ namespace ConfigTaxWin
 
         }
 
-
         private DateTime GetLastDay(DateTime dateIn)
         {
             var lastDay = DateTime.DaysInMonth(dateIn.Year, dateIn.Month);
@@ -377,8 +426,8 @@ namespace ConfigTaxWin
                         switch (control.Name)
                         {
                             case "lblTotalTaxableNormalEarnings":
-                                lblTotalTaxableNormalEarnings.Text = "Total Normal Earnings (YTD)";
-                                txtTotalTaxableNormalEarnings.Text = "";
+                                lblTotalNormalEarnings.Text = "Total Normal Earnings (YTD)";
+                                txtTotalNormalEarnings.Text = "";
                             break;
 
                             case "lblEarnings":
@@ -550,96 +599,67 @@ namespace ConfigTaxWin
 
         }
 
-        private void txtEarnings_KeyDown(object sender, KeyEventArgs e)
+        private void TaxInformation_Paint(object sender, PaintEventArgs e)
         {
-            if (e.KeyData == Keys.Enter)
+            this.ActiveControl = txtTotalNormalEarnings;
+            txtTotalNormalEarnings.Text = "";
+        }
+
+        private string IsFullPeriod()
+        {
+            string isFullPeriod;
+
+            if (dtHireDate.Value <= dtTaxYearStart.Value & dtTerminationDate.Value >= dtPayrollPeriod.Value)
             {
-                e.SuppressKeyPress = true;
-                SelectNextControl(ActiveControl, true, true, true, true);
+                isFullPeriod = "True";
+                int periodsWorked = GetPeriodsWorked();
+                txtPeriodsWorked.Text = periodsWorked.ToString();
+                lblDaysWorked.Text = "Days Worked (Average)";
+                txtDaysWorked.Text = (periodsWorked * Global.AveMonthDays).ToString();
+                return isFullPeriod;
+
+            }
+            else
+            {
+                isFullPeriod = "False";
+                txtPeriodsWorked.Text = "";
+
+                lblDaysWorked.Text = "Days Worked (Actual)";
+                return isFullPeriod;
             }
         }
 
-        private void txtFringeBenefits_KeyDown(object sender, KeyEventArgs e)
+        private int GetPeriodsWorked()
         {
-            if (e.KeyData == Keys.Enter)
-            {
-                e.SuppressKeyPress = true;
-                SelectNextControl(ActiveControl, true, true, true, true);
-            }
+            var months = (((dtPayrollPeriod.Value.Year - dtTaxYearStart.Value.Year) * 12) + dtPayrollPeriod.Value.Month - dtTaxYearStart.Value.Month) + 1;
+            return months;
         }
 
-        private void txtTravelAllowance_KeyDown(object sender, KeyEventArgs e)
+        #endregion
+
+        #region Control Leave
+
+        private void txtTotalTaxableNormalEarnings_Leave(object sender, EventArgs e)
         {
-            if (e.KeyData == Keys.Enter)
-            {
-                e.SuppressKeyPress = true;
-                SelectNextControl(ActiveControl, true, true, true, true);
-            }
+            txtTotalNormalEarnings.Text = string.Format("{0:#,##0.00}", Helper.Nz_TextToDouble(txtTotalNormalEarnings.Text));
         }
 
-        private void txtTotalNormalEarnings_KeyDown(object sender, KeyEventArgs e)
+        private void txtTotalAnnualEarnings_Leave(object sender, EventArgs e)
         {
-            if (e.KeyData == Keys.Enter)
-            {
-                e.SuppressKeyPress = true;
-                SelectNextControl(ActiveControl, true, true, true, true);
-            }
+            txtTotalAnnualEarnings.Text = string.Format("{0:#,##0.00}", Helper.Nz_TextToDouble(txtTotalAnnualEarnings.Text));
         }
 
-        private void txtTotalAnnualEarnings_KeyDown(object sender, KeyEventArgs e)
+        private void txtTotalPreTaxDeductions_Leave(object sender, EventArgs e)
         {
-            if (e.KeyData == Keys.Enter)
-            {
-                e.SuppressKeyPress = true;
-                SelectNextControl(ActiveControl, true, true, true, true);
-            }
+            txtTotalPreTaxDeductions.Text = string.Format("{0:#,##0.00}", Helper.Nz_TextToDouble(txtTotalPreTaxDeductions.Text));
         }
 
-        private void txtBonus_KeyDown(object sender, KeyEventArgs e)
+        private void txtPreviousTax_Leave(object sender, EventArgs e)
         {
-            if (e.KeyData == Keys.Enter)
-            {
-                e.SuppressKeyPress = true;
-                SelectNextControl(ActiveControl, true, true, true, true);
-            }
+            txtPreviousTax.Text = string.Format("{0:#,##0.00}", double.Parse(txtPreviousTax.Text));
         }
 
-        private void txtShares_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyData == Keys.Enter)
-            {
-                e.SuppressKeyPress = true;
-                SelectNextControl(ActiveControl, true, true, true, true);
-            }
-        }
+        #endregion
 
-        private void txtPension_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyData == Keys.Enter)
-            {
-                e.SuppressKeyPress = true;
-                SelectNextControl(ActiveControl, true, true, true, true);
-            }
-        }
-
-        private void txtAnnuities_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyData == Keys.Enter)
-            {
-                e.SuppressKeyPress = true;
-                SelectNextControl(ActiveControl, true, true, true, true);
-            }
-        }
-
-        private void radioButtonSimple_CheckedChanged(object sender, EventArgs e)
-        {
-            SetInputTypeForms();
-        }
-
-        private void radioButtonDetail_CheckedChanged(object sender, EventArgs e)
-        {
-            SetInputTypeForms();
-        }
     }
-    #endregion
 }
